@@ -1,3 +1,16 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Pequeno bar de ramen a dois passos dos Aliados, no Porto. Chef japonês, trinta lugares, esplanada, luz baixa e R&amp;B a tocar até fechar. Rua da Picaria 20.">
+<meta name="theme-color" content="#0c0909">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ramen Me">
+<meta property="og:title" content="Ramen Me | Bar de ramen no Porto">
+<meta property="og:description" content="Primeiro o caldo. Depois o resto. Rua da Picaria 20, Porto.">
+<meta property="og:image" content="img/soba-neon.jpg">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <title>Ramen Me Porto</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +37,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.07;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -466,6 +479,8 @@ blockquote.quote cite{display:block;margin-top:14px;font-family:var(--f-mono);fo
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
 </style>
+</head>
+<body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="wave" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.0008 0.075" numOctaves="1" seed="7"/><feDisplacementMap in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/></filter>
@@ -710,7 +725,7 @@ const SET_MS = 150*60*1000; // 20h–22h30
 let lang = "pt";
 try{ const s=localStorage.getItem("rm-lang"); if(s==="en"||s==="pt") lang=s; else if((navigator.language||"").slice(0,2)!=="pt") lang="en"; }catch(e){}
 const st = {route:"inicio", cat:"all", veg:false, hot:false, q:"", tray:[], res:null, rec:null, news:false, role:null};
-try{ const tr=JSON.parse(localStorage.getItem("rm-tray")||"[]"); if(Array.isArray(tr)) st.tray=tr; }catch(e){}
+try{ const tr=JSON.parse(localStorage.getItem("rm-tray")||"[]"); if(Array.isArray(tr)) st.tray=tr.filter(x=>x&&x.key&&x.q>0&&DISHES.some(d=>d.id===x.id)); }catch(e){}
 const L = ()=>T[lang];
 const tx = v => v==null ? "" : (typeof v==="string" ? v : v[lang]);
 const eur = n => "€"+(lang==="pt" ? n.toFixed(2).replace(".",",") : n.toFixed(2));
@@ -756,11 +771,11 @@ const ticker = (dark)=>{ const items=L().ticker.map(x=>`<span>${esc(x)}</span>`)
 function dishCard(d){
   const tags=(d.tags||[]).map(g=>`<span class="tag ${g}">${g==="veg"?L().fVeg:L().fHot}</span>`).join("");
   const sub = d.cat==="ramen" ? tx(d.tp) : tx(d.d);
-  return `<button class="dish" type="button" data-open="${d.id}" aria-label="${esc(dname(d))}, ${eur(d.p)}">
+  return `<div class="dish" role="button" tabindex="0" data-open="${d.id}" aria-label="${esc(dname(d))}, ${eur(d.p)}">
     <div class="dish-img">${d.img?`<img src="${IMG(d.img)}" alt="" loading="lazy">`:`<div class="kanji" aria-hidden="true">${d.k}</div>`}
       <span class="price-tag">${eur(d.p)}</span><span class="vjp" aria-hidden="true">${d.jp}</span></div>
     <div class="dish-body"><h3>${esc(dname(d))}</h3>${tags?`<div class="tags">${tags}</div>`:""}<p>${esc(sub)}</p></div>
-    <span class="dish-add" aria-hidden="true">+</span></button>`;
+    <span class="dish-add" aria-hidden="true">+</span></div>`;
 }
 function nextNight(){
   const now=Date.now();
@@ -921,7 +936,7 @@ function pRes(){
       <div class="field"><label for="rContact">${t.fContact}</label><input id="rContact" autocomplete="email" value="${esc(f.contact)}"></div>
       <div class="field"><label for="rDate">${t.fDate}</label><input id="rDate" type="date" min="${today}" value="${f.date}"></div>
       <div class="field"><span class="flabel" id="pplLbl">${t.fPeople}</span><div class="stepper" role="group" aria-labelledby="pplLbl"><button type="button" data-ppl="-1" aria-label="−">−</button><output id="rPeople">${f.people}</output><button type="button" data-ppl="1" aria-label="+">+</button></div></div>
-      <div class="field full"><span class="flabel">${t.fTime}</span><div class="slots" id="slots">${sl.lunch.length?`<span class="lab">${t.lunch}</span>${slotBtns(sl.lunch)}`:""}${sl.dinner.length?`<span class="lab">${t.dinner}</span>${slotBtns(sl.dinner)}`:""}</div></div>
+      <div class="field full"><span class="flabel">${t.fTime}</span><div class="slots" id="slots">${!sl.lunch.length&&!sl.dinner.length?`<span class="err">${lang==="pt"?"Já não há horários hoje. Escolhe outra data.":"No times left today. Pick another date."}</span>`:""}${sl.lunch.length?`<span class="lab">${t.lunch}</span>${slotBtns(sl.lunch)}`:""}${sl.dinner.length?`<span class="lab">${t.dinner}</span>${slotBtns(sl.dinner)}`:""}</div></div>
       <div class="field full"><label for="rNote">${t.fNote}</label><textarea id="rNote" placeholder="${t.fNotePh}">${esc(f.note)}</textarea></div>
       <div class="full err" id="resErr" role="alert"></div>
       <div class="full" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><button class="btn btn-neon" type="submit">${t.send} →</button><span class="mono mute" style="font-size:.78rem">${t.sameDay}</span></div>
@@ -971,7 +986,7 @@ function resReceipt(){
 function pBeats(){
   const t=L(), now=Date.now();
   const up=NIGHTS.filter(n=>n.t.getTime()+SET_MS>now), past=NIGHTS.filter(n=>n.t.getTime()+SET_MS<=now).reverse();
-  const wd=n=>n.t.getUTCDay()===5||new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Lisbon",weekday:"short"}).format(n.t)==="Fri"?t.fri:t.sat;
+  const wd=n=>new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Lisbon",weekday:"short"}).format(n.t)==="Fri"?t.fri:t.sat;
   const time=lang==="pt"?"20h–22h30":"20:00–22:30";
   return `<section class="phead"><div class="bgjp" aria-hidden="true">音楽</div><div class="wrap split" style="align-items:center">
     <div style="display:grid;gap:18px"><span class="eyebrow">W/ Beats · Ramen Me</span><h1 class="disp wave-lg neon" style="font-size:clamp(4rem,14vw,10rem)">W/ Beats</h1><p>${t.beatsH1} ${t.beatsP}</p><div class="hero-ctas"><a class="btn btn-neon" href="#reservas">${t.bookTable}</a></div></div>
@@ -1074,10 +1089,11 @@ function openDish(id){
       ${d.cat==="ramen"?`<label class="check addon"><input type="checkbox" id="oil"> ${t.oil}</label>`:""}
       <div class="sheet-foot"><span class="big" id="dPrice">${eur(d.p)}</span><button class="btn btn-neon" type="button" data-add="${d.id}">${t.add} +</button></div>
     </div></div></div>`;
-  document.querySelector("[data-close]").focus();
+  setInert(true); document.querySelector("[data-close]").focus();
   const oil=document.getElementById("oil"); if(oil) oil.addEventListener("change",()=>document.getElementById("dPrice").textContent=eur(d.p+(oil.checked?1.2:0)));
 }
-function closeLayer(){ document.getElementById("layer").innerHTML=""; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+function setInert(on){ ["main","foot"].forEach(id=>document.getElementById(id).inert=on); document.querySelector(".hdr").inert=on; document.getElementById("trayBtn").inert=on; }
+function closeLayer(){ document.getElementById("layer").innerHTML=""; setInert(false); if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
 function saveTray(){ try{localStorage.setItem("rm-tray",JSON.stringify(st.tray));}catch(e){} }
 function addTray(id,oil){
   const key=id+(oil?"+oil":""); const ex=st.tray.find(x=>x.key===key);
@@ -1093,8 +1109,8 @@ function paintTray(bump){
   if(bump){ b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); }
 }
 function trayText(){ const t=L(); return `Ramen Me — ${t.trayTitle}\n`+st.tray.map(x=>{const d=DISHES.find(y=>y.id===x.id); return `${x.q}× ${dname(d)}${x.oil?" "+t.withOil:""} — ${eur((d.p+(x.oil?1.2:0))*x.q)}`;}).join("\n")+`\n${t.total}: ${eur(trayTotal())}`; }
-function openTray(){
-  const t=L(); lastFocus=document.activeElement;
+function openTray(keepFocus){
+  const t=L(); if(!keepFocus) lastFocus=document.activeElement;
   const now=new Intl.DateTimeFormat(lang==="pt"?"pt-PT":"en-GB",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date());
   const lines=st.tray.map(x=>{const d=DISHES.find(y=>y.id===x.id); return `<div class="rline"><span>${esc(dname(d))}${x.oil?` <small style="display:inline;opacity:.7">${t.withOil}</small>`:""}</span><b>${eur((d.p+(x.oil?1.2:0))*x.q)}</b><div class="q"><button type="button" data-q="${x.key}" data-d="-1" aria-label="−">−</button><span>${x.q}</span><button type="button" data-q="${x.key}" data-d="1" aria-label="+">+</button></div></div>`;}).join("");
   document.getElementById("layer").innerHTML=`<div class="scrim" data-scrim><div class="receipt" role="dialog" aria-modal="true" aria-labelledby="rTitle">
@@ -1107,7 +1123,7 @@ function openTray(){
     <div class="barcode" aria-hidden="true"></div>
     ${lines?`<button class="rbtn" type="button" data-copy="tray">${t.copyTicket}</button><a class="rbtn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener" style="background:var(--neon);color:#130404">${t.orderUber} ↗</a><button class="rbtn" type="button" data-clear style="background:transparent;color:var(--paper-ink);border:1.5px solid var(--paper-ink)">${t.clear}</button>`:`<a class="rbtn" href="#menu" data-close>${t.seeMenu}</a>`}
   </div></div>`;
-  document.querySelector("[data-close]").focus();
+  setInert(true); document.querySelector("[data-close]").focus();
 }
 
 /* ================= misc ================= */
@@ -1123,10 +1139,10 @@ function openMnav(){ mnav.hidden=false; burger.setAttribute("aria-expanded","tru
 function closeMnav(){ if(mnav.hidden) return; mnav.hidden=true; burger.setAttribute("aria-expanded","false"); document.body.style.overflow=""; }
 burger.addEventListener("click",openMnav);
 document.getElementById("mclose").addEventListener("click",()=>{closeMnav(); burger.focus();});
-document.getElementById("trayBtn").addEventListener("click",openTray);
+document.getElementById("trayBtn").addEventListener("click",()=>openTray());
 
 document.addEventListener("click",e=>{
-  const el=e.target.closest("button,a,[data-scrim]"); if(!el) return;
+  const el=e.target.closest("button,a,[data-open],[data-scrim]"); if(!el) return;
   if(el.matches("[data-scrim]")){ if(e.target===el) closeLayer(); return; }
   const ds=el.dataset;
   if(ds.lang){ lang=ds.lang; try{localStorage.setItem("rm-lang",lang);}catch(_){}; const y=scrollY; render(); scrollTo({top:y}); return; }
@@ -1135,7 +1151,7 @@ document.addEventListener("click",e=>{
   if(ds.add){ const oil=document.getElementById("oil"); addTray(ds.add,oil&&oil.checked); closeLayer(); toast("✓ "+L().added); return; }
   if(ds.cat){ st.cat=ds.cat; refreshMenu(); return; }
   if(ds.f){ st[ds.f]=!st[ds.f]; if(st[ds.f]&&st.cat==="drinks") st.cat="all"; refreshMenu(); return; }
-  if(ds.q){ const it=st.tray.find(x=>x.key===ds.q); if(it){ it.q+=+ds.d; if(it.q<=0) st.tray=st.tray.filter(x=>x!==it); saveTray(); paintTray(); openTray(); } return; }
+  if(ds.q){ const it=st.tray.find(x=>x.key===ds.q); if(it){ it.q+=+ds.d; if(it.q<=0) st.tray=st.tray.filter(x=>x!==it); saveTray(); paintTray(); openTray(true); } return; }
   if(ds.clear!==undefined){ st.tray=[]; saveTray(); paintTray(); closeLayer(); return; }
   if(ds.copy){ copy(ds.copy==="tray"?trayText():resText()); return; }
   if(ds.copytxt){ copy(ds.copytxt); return; }
@@ -1147,7 +1163,7 @@ document.addEventListener("click",e=>{
 });
 document.addEventListener("input",e=>{
   const id=e.target.id, v=e.target.value;
-  if(id==="msearch"){ st.q=v.trim(); if(st.q&&(st.veg||st.hot)){} refreshMenu(); return; }
+  if(id==="msearch"){ st.q=v.trim(); refreshMenu(); return; }
   const rf=st.resForm, cf=st.recForm;
   if(id==="rName") rf.name=v; if(id==="rContact") rf.contact=v; if(id==="rNote") rf.note=v;
   if(id==="cName") cf.name=v; if(id==="cEmail") cf.email=v; if(id==="cPhone") cf.phone=v; if(id==="cAbout") cf.about=v;
@@ -1169,9 +1185,14 @@ document.addEventListener("submit",e=>{
     if(!f.name.trim()) return err.textContent=t.eName; if(!/^\S+@\S+\.\S+$/.test(f.email)) return err.textContent=t.eEmail; if(!f.consent) return err.textContent=t.eConsent;
     st.rec=true; const y=scrollY; render(); scrollTo({top:y}); }
 });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ if(document.getElementById("layer").innerHTML) closeLayer(); else closeMnav(); } });
+document.addEventListener("keydown",e=>{
+  const card=e.target.closest&&e.target.closest("[data-open]");
+  if(card&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); openDish(card.dataset.open); return; }
+  if(e.key==="Escape"){ if(document.getElementById("layer").innerHTML) closeLayer(); else closeMnav(); } });
 
 setInterval(()=>{ paintCount(); },1000);
 setInterval(paintStatus,30000);
 go();
 </script>
+</body>
+</html>
