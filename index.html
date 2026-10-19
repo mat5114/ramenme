@@ -1,0 +1,1177 @@
+<title>Ramen Me Porto</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Familjen+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: neon-lit street poster — wavy condensed wordmark type, stickers, thermal-receipt tickets, edge-to-edge photo bands on warm black */
+:root{
+  --bg:#0c0909; --bg-2:#161010; --bg-3:#1f1616; --line:#2e2222;
+  --ink:#f3ece2; --mute:#a3958c; --dim:#6c605a;
+  --neon:#ff2d2d; --neon-hot:#ff6a5c; --neon-deep:#9e0f16;
+  --veg:#8fd49a;
+  --paper:#efe8dc; --paper-ink:#151010;
+  --f-display:"Big Shoulders Display","Arial Narrow","Helvetica Neue Condensed",Impact,sans-serif;
+  --f-body:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --f-jp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",sans-serif;
+  --glow:0 0 4px rgba(255,45,45,.9),0 0 14px rgba(255,45,45,.65),0 0 38px rgba(255,45,45,.35);
+  --gutter:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  --wrap:1240px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+::selection{background:var(--neon);color:#000}
+:focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+.wave{filter:url(#wave)}
+.wave-lg{filter:url(#wave-lg)}
+.jp{font-family:var(--f-jp);font-weight:600;letter-spacing:.04em}
+.mono{font-family:var(--f-mono)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--neon)}
+.disp{font-family:var(--f-display);font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:.005em;text-wrap:balance;margin:0}
+.neon{color:#fff1ee;text-shadow:var(--glow)}
+.mute{color:var(--mute)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.logo{display:flex;align-items:center;color:var(--ink);text-decoration:none;flex:none}
+.logo svg{height:30px;width:auto;display:block}
+.logo:hover svg{filter:drop-shadow(0 0 6px rgba(255,45,45,.8))}
+.nav{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav a{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:8px 10px;border-radius:2px;color:var(--mute);transition:color .15s}
+.nav a:hover{color:var(--ink)}
+.nav a[aria-current="page"]{color:var(--neon);text-shadow:0 0 10px rgba(255,45,45,.6)}
+.hdr-tools{display:flex;align-items:center;gap:10px;margin-left:12px}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--bg-2)}
+.lang button{border:0;background:none;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;padding:5px 10px;border-radius:999px;cursor:pointer;color:var(--mute)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn{display:inline-flex;align-items:center;gap:10px;justify-content:center;font-family:var(--f-mono);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:13px 20px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:0;transition:background .15s,color .15s,box-shadow .2s,transform .1s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn:active{transform:translateY(1px)}
+.btn-neon{border-color:var(--neon);background:var(--neon);color:#120404;box-shadow:0 0 0 0 rgba(255,45,45,0)}
+.btn-neon:hover{background:#ff4646;color:#120404;box-shadow:var(--glow)}
+.btn-sm{padding:9px 14px;font-size:.72rem}
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line);background:var(--bg-2);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.burger span{display:block;width:18px;height:2px;background:var(--ink)}
+
+/* mobile overlay */
+.mnav{position:fixed;inset:0;z-index:70;background:var(--bg);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 14px) var(--gutter-r) calc(env(safe-area-inset-bottom,0px) + 24px) var(--gutter);overflow-y:auto}
+.mnav-top{display:flex;justify-content:space-between;align-items:center;height:50px}
+.mnav-close{width:44px;height:44px;border:1px solid var(--line);background:var(--bg-2);cursor:pointer;font-size:22px;line-height:1}
+.mnav ul{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:2px}
+.mnav li a{display:flex;align-items:baseline;justify-content:space-between;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,13vw,4.4rem);line-height:.95;padding:6px 0;border-bottom:1px solid var(--line)}
+.mnav li a small{font-family:var(--f-jp);font-size:.8rem;color:var(--dim);font-weight:600}
+.mnav li a[aria-current="page"]{color:var(--neon);text-shadow:var(--glow)}
+.mnav-foot{margin-top:auto;padding-top:28px;display:grid;gap:14px;font-family:var(--f-mono);font-size:.8rem;color:var(--mute)}
+.mnav-foot .lang{justify-self:start}
+
+/* status pill */
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border:1px solid var(--line);background:rgba(12,9,9,.7);border-radius:999px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--dim);flex:none}
+.status.open i{background:var(--neon);box-shadow:0 0 8px var(--neon);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+
+/* ---------- ticker ---------- */
+.ticker{overflow:hidden;border-block:1px solid var(--line);background:var(--neon);color:#130404;white-space:nowrap}
+.ticker-track{display:inline-flex;gap:0;animation:tick 38s linear infinite;padding-block:10px}
+.ticker span{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:1.35rem;letter-spacing:.02em;padding-right:28px;display:inline-flex;align-items:center;gap:28px}
+.ticker span::after{content:"✳";font-size:1rem}
+.ticker.dark{background:var(--bg-2);color:var(--ink)}
+.ticker.dark span::after{color:var(--neon)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate;border-bottom:1px solid var(--line)}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:saturate(1.1) contrast(1.05)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,9,9,.96) 0%,rgba(12,9,9,.78) 42%,rgba(12,9,9,.15) 75%),linear-gradient(0deg,rgba(12,9,9,.9),transparent 45%)}
+.hero .wrap{padding-block:clamp(56px,10vw,120px) clamp(40px,7vw,80px);display:grid;gap:26px}
+.hero h1{font-size:clamp(3.4rem,11.5vw,9.6rem);max-width:9.5ch}
+.hero h1 .l2{display:block;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.hero h1 .l2.neonline{color:#fff1ee;-webkit-text-stroke:0;text-shadow:var(--glow);animation:flicker 4s 1}
+.hero p.lead{max-width:44ch;font-size:clamp(1.05rem,1.6vw,1.25rem);color:#ddd2c7;margin:0}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sticker{display:inline-block;font-family:var(--f-mono);font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:7px 10px;transform:rotate(-3deg);box-shadow:3px 3px 0 var(--neon)}
+.sticker.red{background:var(--neon);color:#130404;box-shadow:3px 3px 0 var(--ink)}
+@keyframes flicker{0%,8%,12%,40%,44%,100%{opacity:1}10%,42%{opacity:.25}}
+
+/* ---------- sections ---------- */
+section.band{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head h2{font-size:clamp(2.6rem,7vw,5.6rem)}
+.sec-head p{max-width:56ch;color:var(--mute);margin:0}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
+.split>*{min-width:0}
+.prose p{margin:0 0 1em;max-width:58ch}
+.prose p:last-child{margin-bottom:0}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.stat{padding:26px 20px;border-right:1px solid var(--line);display:grid;gap:4px}
+.stat:last-child{border-right:0}
+.stat b{font-family:var(--f-display);font-weight:900;font-size:clamp(2.6rem,5vw,3.8rem);line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.stat:first-child b{color:var(--neon);text-shadow:var(--glow)}
+
+/* collage */
+.collage{position:relative;aspect-ratio:1/1.05;max-width:100%}
+.collage figure{position:absolute;margin:0;border:6px solid var(--paper);background:var(--paper);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.collage figure img{width:100%;height:100%;object-fit:cover}
+.collage .c1{width:58%;aspect-ratio:4/5;left:0;top:4%;transform:rotate(-4deg)}
+.collage .c2{width:52%;aspect-ratio:4/5;right:0;top:0;transform:rotate(5deg)}
+.collage .c3{width:50%;aspect-ratio:1;left:26%;bottom:0;transform:rotate(-1deg);z-index:2}
+.collage .sticker{position:absolute;z-index:3}
+.collage .s1{left:2%;bottom:16%}
+.collage .s2{right:4%;bottom:38%;transform:rotate(6deg)}
+
+/* dish rail (home) */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,300px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--neon) var(--bg-2)}
+.rail>*{scroll-snap-align:start}
+
+/* dish card */
+.dish{position:relative;display:flex;flex-direction:column;background:var(--bg-2);border:1px solid var(--line);text-align:left;padding:0;cursor:pointer;color:inherit;transition:border-color .2s,transform .2s;min-width:0}
+.dish:hover{border-color:var(--neon);transform:translateY(-3px)}
+.dish:hover .dish-img img{transform:scale(1.05)}
+.dish-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-3)}
+.dish-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.dish-img .kanji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-jp);font-weight:800;font-size:4rem;color:transparent;-webkit-text-stroke:1px var(--neon);text-shadow:0 0 30px rgba(255,45,45,.25);writing-mode:vertical-rl;letter-spacing:.1em;background:radial-gradient(circle at 50% 40%,#2a1414,var(--bg-3) 70%)}
+.dish-img .vjp{position:absolute;top:10px;right:8px;writing-mode:vertical-rl;font-family:var(--f-jp);font-weight:700;font-size:.8rem;letter-spacing:.12em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.9);opacity:.9}
+.price-tag{position:absolute;left:10px;top:10px;font-family:var(--f-mono);font-weight:700;font-size:.82rem;background:var(--neon);color:#130404;padding:5px 8px;transform:rotate(-4deg);font-variant-numeric:tabular-nums}
+.dish-body{padding:14px 56px 16px 14px;display:grid;gap:8px;flex:1;align-content:start}
+.dish-body h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:1.65rem;line-height:.92;margin:0}
+.dish-body p{margin:0;font-size:.88rem;color:var(--mute);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border:1px solid currentColor;border-radius:999px}
+.tag.veg{color:var(--veg)}
+.tag.hot{color:var(--neon)}
+.dish-add{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ink);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.3rem;line-height:1;transition:background .15s,color .15s}
+.dish:hover .dish-add{background:var(--neon);border-color:var(--neon);color:#130404}
+.dish-img .dish-add{bottom:auto;top:10px;right:auto;left:auto}
+
+/* beats teaser / gig */
+.gig{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;padding:clamp(24px,4vw,44px);border:1.5px solid var(--neon);box-shadow:inset 0 0 40px rgba(255,45,45,.12),0 0 30px rgba(255,45,45,.15);background:radial-gradient(120% 120% at 100% 0%,rgba(158,15,22,.35),transparent 60%),var(--bg-2);position:relative;overflow:hidden}
+.gig>*{min-width:0}
+.gig .when{font-family:var(--f-mono);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.gig .who{font-size:clamp(3rem,10vw,7.5rem);margin-top:6px}
+.count{display:flex;gap:10px;font-family:var(--f-mono)}
+.count div{display:grid;justify-items:center;min-width:62px;padding:10px 8px;border:1px solid var(--line);background:var(--bg)}
+.count b{font-size:1.7rem;font-variant-numeric:tabular-nums;line-height:1}
+.count small{font-size:.62rem;letter-spacing:.12em;color:var(--mute);text-transform:uppercase;margin-top:4px}
+.eq{display:flex;gap:4px;align-items:flex-end;height:36px}
+.eq i{width:6px;background:var(--neon);box-shadow:0 0 8px var(--neon);animation:eq 1s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}.eq i:nth-child(4){animation-delay:-.15s}.eq i:nth-child(5){animation-delay:-.45s}
+@keyframes eq{from{height:20%}to{height:100%}}
+
+/* room band */
+.room{position:relative;overflow:hidden;isolation:isolate}
+.room-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.room-grid figure{margin:0;overflow:hidden;background:var(--bg-3);min-width:0}
+.room-grid img{width:100%;height:100%;object-fit:cover}
+.room-grid .r1{grid-column:span 5;aspect-ratio:4/5}
+.room-grid .r2{grid-column:span 4;aspect-ratio:4/5;margin-top:60px}
+.room-grid .r3{grid-column:span 3;aspect-ratio:3/5}
+blockquote.quote{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.05;text-transform:uppercase;max-width:22ch}
+blockquote.quote cite{display:block;margin-top:14px;font-family:var(--f-mono);font-style:normal;font-size:.74rem;letter-spacing:.1em;color:var(--mute);font-weight:400}
+
+/* ig wall */
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ig a{position:relative;aspect-ratio:1;overflow:hidden;display:block;background:var(--bg-3)}
+.ig img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s;filter:grayscale(.2)}
+.ig a:hover img{transform:scale(1.06);filter:none}
+.ig a::after{content:"";position:absolute;inset:0;background:var(--neon);mix-blend-mode:multiply;opacity:0;transition:opacity .3s}
+.ig a:hover::after{opacity:.35}
+
+/* cta band */
+.cta{background:var(--neon);color:#130404;position:relative;overflow:hidden}
+.cta .wrap{padding-block:clamp(56px,8vw,96px);display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:end}
+.cta .wrap>*{min-width:0}
+.cta h2{font-size:clamp(3.4rem,10vw,8rem);color:#130404}
+.cta .btn{border-color:#130404;color:#130404}
+.cta .btn:hover{background:#130404;color:var(--neon)}
+.cta .btn-dark{background:#130404;color:var(--ink);border-color:#130404}
+.cta .btn-dark:hover{background:transparent;color:#130404}
+.cta .hours{font-family:var(--f-mono);font-size:.85rem;display:grid;gap:4px;margin-bottom:18px}
+
+/* newsletter */
+.news{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:clamp(24px,4vw,40px);border:1px dashed var(--line);background:var(--bg-2)}
+.news>*{min-width:0}
+.news h3{font-size:clamp(2rem,4vw,3rem)}
+.inline-form{display:flex;gap:0;flex-wrap:wrap}
+.inline-form input{flex:1 1 200px;min-width:0}
+.field input,.field select,.field textarea,.inline-form input{width:100%;background:var(--bg);border:1.5px solid var(--line);padding:13px 14px;border-radius:0;color:var(--ink);font-size:1rem}
+.field input:focus,.field select:focus,.field textarea:focus,.inline-form input:focus{outline:none;border-color:var(--neon);box-shadow:0 0 0 3px rgba(255,45,45,.18)}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.flabel{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.field textarea{min-height:110px;resize:vertical}
+.note{font-size:.82rem;color:var(--dim);margin:10px 0 0}
+.proto{display:inline-block;font-family:var(--f-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--dim);color:var(--mute);padding:2px 6px;margin-left:6px;vertical-align:middle}
+.ok-msg{font-family:var(--f-mono);font-size:.85rem;color:var(--veg);margin-top:10px}
+
+/* ---------- page head ---------- */
+.phead{border-bottom:1px solid var(--line);position:relative;overflow:hidden;isolation:isolate}
+.phead .wrap{padding-block:clamp(48px,8vw,96px) clamp(32px,5vw,56px);display:grid;gap:18px}
+.phead h1{font-size:clamp(3.2rem,10vw,8rem);max-width:12ch}
+.phead p{max-width:52ch;color:#d9cdc2;margin:0;font-size:1.08rem}
+.phead .bgjp{position:absolute;right:-2%;top:50%;transform:translateY(-50%);font-family:var(--f-jp);font-weight:900;font-size:clamp(8rem,26vw,22rem);color:transparent;-webkit-text-stroke:1px rgba(255,45,45,.22);z-index:-1;white-space:nowrap;line-height:1;pointer-events:none}
+
+/* ---------- menu page ---------- */
+.mbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);z-index:40;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.mbar .wrap{display:flex;gap:12px;align-items:center;padding-block:12px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.chip{flex:none;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border:1.5px solid var(--line);background:var(--bg-2);cursor:pointer;border-radius:999px;color:var(--mute);transition:all .15s;display:inline-flex;gap:8px;align-items:center}
+.chip:hover{color:var(--ink);border-color:var(--mute)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip.hotc[aria-pressed="true"]{background:var(--neon);border-color:var(--neon);color:#130404}
+.chip.vegc[aria-pressed="true"]{background:var(--veg);border-color:var(--veg);color:#0d1a0f}
+.chip .n{font-size:.62rem;opacity:.7}
+.mfilters{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.search{position:relative;flex:0 1 240px;min-width:160px}
+.search input{width:100%;background:var(--bg);border:1.5px solid var(--line);padding:9px 12px 9px 34px;border-radius:999px;font-size:.9rem}
+.search input:focus{outline:none;border-color:var(--neon)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--mute)}
+.msec{padding-block:44px 8px}
+.msec-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:22px}
+.msec-h h2{font-size:clamp(2.4rem,6vw,4rem)}
+.msec-h .jp{color:var(--neon);font-size:1rem}
+.msec-h p{margin:0;color:var(--mute);font-size:.9rem;flex-basis:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.empty{padding:60px 0;text-align:center;color:var(--mute);font-family:var(--f-mono)}
+.addon{display:inline-flex;gap:8px;align-items:center;font-family:var(--f-mono);font-size:.78rem;color:var(--ink);background:var(--bg-2);border:1px dashed var(--neon);padding:7px 12px}
+
+.drinks{columns:2 340px;column-gap:48px}
+.dgroup{break-inside:avoid;margin-bottom:34px}
+.dgroup h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:1.9rem;margin:0 0 4px;line-height:1}
+.dgroup .sub{font-family:var(--f-mono);font-size:.7rem;color:var(--neon);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.dgroup h4{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:14px 0 2px;font-weight:400}
+.drow{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--line)}
+.drow .dn{min-width:0}
+.drow .dn b{font-weight:600}
+.drow .dn small{display:block;color:var(--mute);font-size:.82rem;line-height:1.35}
+.drow .lead{flex:1}
+.drow .dp{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:.9rem;white-space:nowrap}
+.allerg{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;padding:24px;border:1px solid var(--line);background:var(--bg-2)}
+.allerg>*{min-width:0}
+.allerg .ico{font-family:var(--f-display);font-weight:900;font-size:3rem;line-height:1;color:var(--neon)}
+
+/* sheet / modal */
+.scrim{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:calc(env(safe-area-inset-top,0px) + 16px) var(--gutter-r) calc(env(safe-area-inset-bottom,0px) + 16px) var(--gutter)}
+.sheet{width:min(920px,100%);max-height:100%;overflow:auto;background:var(--bg-2);border:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;position:relative;animation:rise .25s ease-out}
+.sheet>*{min-width:0}
+@keyframes rise{from{transform:translateY(20px);opacity:0}}
+.sheet-img{background:var(--bg-3);min-height:320px;position:relative}
+.sheet-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.sheet-img .kanji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--f-jp);font-weight:800;font-size:6rem;color:transparent;-webkit-text-stroke:1.2px var(--neon);writing-mode:vertical-rl}
+.sheet-body{padding:clamp(22px,3vw,36px);display:grid;gap:16px;align-content:start}
+.sheet-body h3{font-size:clamp(2.4rem,5vw,3.6rem)}
+.sheet-close{position:absolute;top:10px;right:10px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:1.2rem;z-index:2}
+.spec{display:grid;gap:0;margin:0}
+.spec div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.spec dt{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-top:3px}
+.spec dd{margin:0;font-size:.95rem}
+.sheet-foot{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-top:8px}
+.sheet-foot .big{font-family:var(--f-mono);font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.check{display:flex;gap:10px;align-items:center;cursor:pointer;font-size:.92rem}
+.check input{width:18px;height:18px;accent-color:var(--neon)}
+
+/* ticket tray */
+.tray-btn{position:fixed;z-index:55;right:calc(var(--gutter-r) + 4px);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);display:flex;align-items:center;gap:12px;background:var(--paper);color:var(--paper-ink);border:0;padding:12px 18px 12px 14px;font-family:var(--f-mono);font-weight:700;font-size:.82rem;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.6),4px 4px 0 var(--neon);transform:rotate(-1.5deg);transition:transform .15s}
+.tray-btn:hover{transform:rotate(0) translateY(-2px)}
+.tray-btn .cnt{background:var(--neon);color:#130404;border-radius:999px;min-width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px}
+.tray-btn.bump{animation:bump .35s}
+@keyframes bump{40%{transform:rotate(2deg) scale(1.08)}}
+.receipt{width:min(380px,100%);max-height:100%;overflow:auto;background:var(--paper);color:var(--paper-ink);font-family:var(--f-mono);font-size:.85rem;padding:26px 22px 30px;position:relative;animation:rise .25s ease-out;
+  -webkit-mask:radial-gradient(circle 6px at 50% 0,transparent 98%,#000) top/14px 51% repeat-x,radial-gradient(circle 6px at 50% 100%,transparent 98%,#000) bottom/14px 51% repeat-x;
+  mask:radial-gradient(circle 6px at 50% 0,transparent 98%,#000) top/14px 51% repeat-x,radial-gradient(circle 6px at 50% 100%,transparent 98%,#000) bottom/14px 51% repeat-x}
+.receipt h3{font-family:var(--f-display);font-weight:900;font-size:2rem;text-transform:uppercase;text-align:center;margin:4px 0 0;line-height:1}
+.receipt .c{text-align:center}
+.receipt hr{border:0;border-top:1.5px dashed var(--paper-ink);margin:14px 0}
+.rline{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:6px 0}
+.rline .q{display:flex;gap:6px;align-items:center}
+.rline .q button{width:24px;height:24px;border:1.5px solid var(--paper-ink);background:none;color:var(--paper-ink);cursor:pointer;font-weight:700;line-height:1;padding:0}
+.rline small{grid-column:1/-1;opacity:.65}
+.rtotal{display:flex;justify-content:space-between;font-weight:700;font-size:1.15rem}
+.receipt .x{position:absolute;right:12px;top:14px;background:none;border:0;font-size:1.3rem;cursor:pointer;color:var(--paper-ink)}
+.receipt .barcode{height:42px;margin:16px auto 6px;width:80%;background:repeating-linear-gradient(90deg,var(--paper-ink) 0 2px,transparent 2px 4px,var(--paper-ink) 4px 5px,transparent 5px 8px,var(--paper-ink) 8px 11px,transparent 11px 12px)}
+.receipt .rbtn{display:block;width:100%;margin-top:10px;background:var(--paper-ink);color:var(--paper);border:0;padding:12px;font-family:var(--f-mono);font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none}
+
+/* ---------- reservations ---------- */
+.res{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,4vw,56px);align-items:start}
+.res>*{min-width:0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-grid .full{grid-column:1/-1}
+.stepper{display:flex;align-items:stretch;border:1.5px solid var(--line);background:var(--bg)}
+.stepper button{width:48px;border:0;background:var(--bg-2);cursor:pointer;font-size:1.2rem}
+.stepper button:hover{background:var(--bg-3)}
+.stepper output{flex:1;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:1.1rem;font-variant-numeric:tabular-nums;padding:11px 0}
+.slots{display:flex;flex-wrap:wrap;gap:6px}
+.slots .chip{padding:8px 11px}
+.slots .lab{flex-basis:100%;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:6px}
+.err{color:var(--neon-hot);font-family:var(--f-mono);font-size:.78rem;min-height:1em}
+.side-card{border:1px solid var(--line);background:var(--bg-2);padding:24px;display:grid;gap:12px}
+.side-card h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:1.8rem;margin:0;line-height:1}
+.side-card ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.side-card li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem}
+.side-card li::before{content:"→";color:var(--neon);font-family:var(--f-mono)}
+.hrs{display:grid;gap:0}
+.hrs div{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dotted var(--line);font-family:var(--f-mono);font-size:.86rem}
+.hrs div span:last-child{font-variant-numeric:tabular-nums;text-align:right}
+.uber{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.uber>*{min-width:0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.facts div{border:1px solid var(--line);padding:16px;background:var(--bg-2)}
+.facts small{display:block;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.bento-steps{display:grid;gap:10px}
+.bstep{display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center;padding:14px;border:1px solid var(--line);background:var(--bg-2)}
+.bstep b{font-family:var(--f-display);font-weight:900;font-size:2.4rem;color:var(--neon);text-shadow:var(--glow);text-align:center;line-height:1}
+
+/* ---------- beats ---------- */
+.lineup{display:grid;border-top:1px solid var(--line)}
+.lrow{display:grid;grid-template-columns:120px 110px 1fr auto;gap:16px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.lrow>*{min-width:0}
+.lrow .d{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.lrow .dt{font-family:var(--f-display);font-weight:900;font-size:2.2rem;line-height:1;font-variant-numeric:tabular-nums}
+.lrow .nm{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(1.9rem,4.5vw,3.2rem);line-height:.95;overflow-wrap:anywhere}
+.lrow.next .nm{color:#fff1ee;text-shadow:var(--glow)}
+.lrow .t{font-family:var(--f-mono);font-size:.8rem;color:var(--mute)}
+.past{border-top:1px solid var(--line)}
+.past details{border-bottom:1px solid var(--line)}
+.past summary{list-style:none;display:grid;grid-template-columns:120px 110px 1fr auto;gap:16px;align-items:center;padding:16px 0;cursor:pointer}
+.past summary::-webkit-details-marker{display:none}
+.past summary>*{min-width:0}
+.past summary .pl{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);transition:transform .2s,border-color .2s}
+.past details[open] summary .pl{transform:rotate(45deg);border-color:var(--neon);color:var(--neon)}
+.past summary .nm{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(1.6rem,3.6vw,2.4rem);line-height:1;color:var(--mute)}
+.past summary:hover .nm{color:var(--ink)}
+.past .bio{padding:0 0 22px;display:grid;grid-template-columns:120px 1fr;gap:16px}
+.past .bio>*{min-width:0}
+.avatar{width:110px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:900;font-size:2.6rem;background:radial-gradient(circle,var(--neon-deep),var(--bg-3));color:var(--ink);border-radius:50%;position:relative}
+.avatar::after{content:"";position:absolute;inset:38%;border-radius:50%;background:var(--bg);box-shadow:0 0 0 2px var(--neon)}
+.avatar span{position:absolute;top:8px;font-size:1rem}
+.vinyl{width:min(360px,80vw);aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#141010 0 2px,#1d1717 2px 4px);position:relative;box-shadow:0 0 0 2px var(--line),0 30px 80px rgba(0,0,0,.6);animation:spin 6s linear infinite;justify-self:center}
+.vinyl::after{content:"";position:absolute;inset:34%;border-radius:50%;background:var(--neon);box-shadow:0 0 30px rgba(255,45,45,.5)}
+.vinyl b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:1;font-family:var(--f-display);font-weight:900;color:#130404;font-size:1.2rem;letter-spacing:.06em}
+.vinyl::before{content:"";position:absolute;inset:48.5%;border-radius:50%;background:var(--bg);z-index:2}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- contact ---------- */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+.cgrid>div{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:6px;align-content:start;min-width:0}
+.cgrid>div:nth-child(3n){border-right:0}
+.cgrid>div:nth-last-child(-n+3){border-bottom:0}
+.cgrid small{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.cgrid b{font-weight:600;font-size:1.05rem;overflow-wrap:anywhere}
+.copy{background:none;border:1px solid var(--line);font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;cursor:pointer;color:var(--mute);justify-self:start}
+.copy:hover{border-color:var(--neon);color:var(--neon)}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cards3>div{border:1px solid var(--line);padding:24px;display:grid;gap:10px;align-content:start;background:var(--bg-2);min-width:0}
+.cards3 h3{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:1.7rem;margin:0;line-height:1}
+.cards3 p{margin:0;color:var(--mute)}
+.cards3 a{font-family:var(--f-mono);font-size:.8rem;color:var(--neon);text-decoration:none}
+.rec{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.rec>*{min-width:0}
+.roles{display:flex;flex-wrap:wrap;gap:6px}
+.file{border:1.5px dashed var(--line);padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--bg);font-size:.9rem;color:var(--mute)}
+.file:hover{border-color:var(--neon)}
+.file input{position:absolute;opacity:0;width:1px;height:1px}
+
+/* privacy */
+.legal{max-width:70ch}
+.legal h2{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:2rem;margin:36px 0 8px;line-height:1}
+.legal p,.legal li{color:#d9cdc2}
+
+/* ---------- footer ---------- */
+.foot{border-top:1px solid var(--line);background:#080606;padding-block:clamp(48px,7vw,80px) calc(env(safe-area-inset-bottom,0px) + 90px)}
+.foot-top{display:grid;grid-template-columns:1.2fr repeat(3,.6fr);gap:32px}
+.foot-top>*{min-width:0}
+.foot-logo{color:var(--ink);display:block;max-width:300px}
+.foot-logo svg{width:100%;height:auto}
+.foot h4{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--neon);margin:0 0 12px;font-weight:400}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot ul a{text-decoration:none;color:var(--mute)}
+.foot ul a:hover{color:var(--ink)}
+.foot-bot{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.74rem;color:var(--dim)}
+.mascot{width:120px;height:120px;color:var(--ink);filter:drop-shadow(0 0 18px rgba(255,241,230,.25))}
+.foot-addr{display:grid;gap:14px;margin-top:22px;color:var(--mute);font-size:.95rem}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 86px);transform:translateX(-50%);z-index:95;background:var(--ink);color:var(--bg);font-family:var(--f-mono);font-size:.8rem;padding:10px 16px;box-shadow:3px 3px 0 var(--neon);white-space:nowrap}
+
+/* ---------- responsive ---------- */
+@media (max-width:1060px){
+  .nav,.hdr-tools .lang,.hdr-tools .btn{display:none}
+  .burger{display:inline-flex}
+  .hdr-tools{margin-left:auto}
+}
+@media (max-width:900px){
+  .split,.res,.uber,.rec,.news,.cta .wrap{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}
+  .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .room-grid .r1{grid-column:span 7}.room-grid .r2{grid-column:span 5;margin-top:30px}.room-grid .r3{display:none}
+  .ig{grid-template-columns:repeat(3,1fr)}
+  .cgrid{grid-template-columns:1fr 1fr}
+  .cgrid>div{border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}
+  .cgrid>div:nth-child(2n){border-right:0!important}
+  .cards3{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .foot-top>:first-child{grid-column:1/-1}
+  .sheet{grid-template-columns:1fr}
+  .sheet-img{min-height:0;aspect-ratio:16/11}
+  .gig{grid-template-columns:1fr}
+  .collage{max-width:520px;margin-inline:auto;width:100%}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .form-grid{grid-template-columns:1fr}
+  .lrow,.past summary{grid-template-columns:62px 1fr auto;gap:12px}
+  .lrow .d,.past summary .d{grid-column:1;grid-row:1}
+  .lrow .dt,.past summary .dt{grid-column:1;grid-row:2;font-size:1.5rem}
+  .lrow .nm,.past summary .nm{grid-column:2;grid-row:1/3}
+  .lrow .t{grid-column:2;grid-row:3}
+  .lrow>.btn,.past summary .pl{grid-column:3;grid-row:1/3}
+  .past .bio{grid-template-columns:1fr}
+  .avatar{width:80px;font-size:2rem}
+  .cgrid{grid-template-columns:1fr}
+  .cgrid>div{border-right:0!important}
+  .ig{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr;gap:10px}
+  .dish-body h3{font-size:1.3rem}
+  .dish-body p{display:none}
+  .dish-body{padding:10px 44px 12px 10px}
+  .dish-add{width:34px;height:34px}
+  .count div{min-width:0;flex:1}
+  .facts{grid-template-columns:1fr}
+  .spec div{grid-template-columns:1fr;gap:2px}
+  .mbar{top:calc(env(safe-area-inset-top,0px) + 64px)}
+  .search{flex:1 1 100%}
+  .hero::before{background:linear-gradient(0deg,rgba(12,9,9,.97) 10%,rgba(12,9,9,.55) 60%,rgba(12,9,9,.35))}
+  .hero .wrap{padding-top:140px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wave" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.0008 0.075" numOctaves="1" seed="7"/><feDisplacementMap in="SourceGraphic" scale="6" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="wave-lg" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.0006 0.045" numOctaves="1" seed="7"/><feDisplacementMap in="SourceGraphic" scale="14" xChannelSelector="R" yChannelSelector="G"/></filter>
+</svg>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Ramen Me"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="34.0 39.5 270.5 66.5"><path fill="currentColor" fill-rule="evenodd" d="M278.5,41.6 278.0,42.2 278.0,43.1 278.8,47.0 278.8,52.8 278.2,54.6 277.9,57.4 277.0,60.0 276.9,61.0 275.2,64.9 274.1,68.5 274.1,69.1 273.5,71.5 273.4,74.4 275.0,80.9 276.8,84.6 278.1,88.6 278.6,89.5 279.6,93.6 279.6,99.9 279.2,101.4 278.9,104.9 302.9,104.9 302.9,103.5 303.4,99.9 303.4,97.6 303.1,97.4 290.4,97.2 289.6,97.0 289.1,96.5 289.0,92.5 288.8,90.8 287.8,87.0 285.9,82.2 285.0,81.0 284.1,79.1 283.0,75.5 283.1,72.8 284.1,70.2 284.8,69.8 298.2,69.6 299.2,69.0 299.6,68.0 300.0,64.8 300.9,60.5 300.9,59.6 300.6,59.2 288.0,59.1 287.2,58.6 287.1,58.1 287.6,56.6 288.1,52.9 288.4,52.4 289.0,52.0 301.2,52.0 302.1,51.5 302.4,50.6 302.4,49.4 303.0,45.0 302.9,42.1 302.2,41.6Z M153.0,41.8 152.5,42.5 153.0,45.2 153.1,51.9 152.9,55.2 152.0,58.8 151.1,60.9 150.9,62.2 149.2,66.1 148.2,69.6 148.0,71.2 148.0,75.4 149.1,80.0 149.9,81.2 151.2,85.2 152.9,88.8 153.8,92.2 154.0,94.1 154.0,99.8 153.1,104.9 177.2,104.9 177.2,103.2 177.8,100.2 177.8,97.6 177.4,97.2 164.5,97.2 163.8,96.8 163.5,96.1 163.5,93.1 162.5,87.9 161.8,85.5 161.0,84.2 159.9,81.4 158.9,79.9 158.0,77.9 157.6,75.8 157.6,73.0 158.1,70.9 159.4,69.6 173.0,69.6 173.8,69.1 174.9,63.4 174.9,61.9 175.1,60.9 175.0,59.4 174.5,59.1 162.5,59.1 161.9,58.6 161.8,58.0 162.6,52.9 163.5,52.0 174.1,52.0 176.5,51.8 176.9,51.1 177.4,42.4 177.1,42.0 176.1,41.6Z M40.0,41.8 39.5,42.0 39.2,42.5 39.6,45.9 39.6,49.5 38.9,56.6 38.2,58.4 38.0,59.9 37.1,62.0 36.6,64.5 36.2,65.4 36.0,67.2 35.5,68.6 35.0,71.5 35.0,73.6 35.5,76.4 37.1,81.8 38.8,85.1 40.0,88.8 40.9,90.6 41.1,91.8 41.2,93.8 41.6,95.5 41.6,97.5 40.6,104.9 51.1,104.9 51.1,104.0 51.6,102.4 52.0,98.8 52.0,95.0 51.2,90.2 51.8,89.8 54.5,89.6 56.4,89.8 57.2,90.1 57.9,90.8 58.2,91.6 58.8,94.8 58.8,98.4 57.9,103.9 57.9,104.9 68.5,104.9 68.8,102.2 69.6,97.6 69.5,94.6 68.8,91.2 67.8,89.1 65.6,86.9 65.2,86.2 65.2,82.6 64.5,79.9 63.9,78.6 63.0,74.6 63.0,71.4 63.9,66.2 64.9,63.8 67.6,52.8 67.8,48.6 67.1,46.6 66.1,44.9 64.5,43.4 63.1,42.6 61.1,42.0 58.9,41.8Z M50.2,51.9 54.0,52.0 55.0,52.8 55.4,53.6 55.0,59.0 53.2,66.5 52.6,70.8 53.1,73.9 54.4,77.4 54.4,78.4 53.9,78.9 52.9,79.1 49.6,79.1 48.6,78.9 47.1,77.0 46.0,73.9 46.1,68.8 46.5,67.6 47.0,64.6 47.9,62.4 48.8,58.1 48.8,53.2 48.9,52.6 49.2,52.1Z M185.1,42.0 183.2,43.1 181.4,45.4 180.4,47.8 180.0,49.8 179.9,51.9 179.2,54.1 178.9,56.5 178.0,59.1 176.2,69.6 176.4,74.2 176.9,75.9 177.2,78.4 177.8,79.6 178.1,81.9 178.9,84.0 179.2,86.2 179.8,87.6 180.1,90.5 181.0,94.1 181.0,99.4 180.0,104.9 190.8,104.9 190.9,103.6 191.4,101.9 191.8,99.4 191.8,93.8 191.0,90.5 189.9,87.5 188.9,83.6 188.1,82.0 186.9,77.9 186.8,76.2 186.4,75.0 186.2,71.1 187.1,65.9 187.8,64.1 188.0,62.6 188.6,61.4 189.5,57.2 189.8,52.8 190.0,52.2 190.8,51.6 192.9,50.9 193.9,50.9 195.4,51.6 196.0,52.2 196.2,53.2 196.1,56.6 195.9,58.0 195.0,60.9 194.0,65.6 193.0,68.8 192.8,71.0 192.8,74.4 193.2,77.1 193.9,78.5 195.1,83.5 195.9,85.1 196.9,88.1 197.0,89.2 198.0,92.6 198.4,95.8 198.4,97.6 198.0,101.1 197.2,104.9 208.0,104.9 208.9,99.2 208.9,95.4 208.6,93.1 207.9,90.4 207.0,88.2 205.8,84.2 205.0,83.0 204.0,80.2 203.9,79.4 203.1,77.5 202.6,74.9 202.6,69.9 203.0,67.1 203.8,64.5 204.0,62.6 204.6,60.8 205.0,58.6 205.8,56.8 206.5,52.1 206.5,47.5 206.0,45.6 205.5,44.8 203.8,42.9 202.2,42.0 199.5,41.1 198.4,41.1 196.5,40.8 191.0,40.8 190.0,41.0 187.9,41.1Z M75.6,42.1 74.1,43.0 72.5,44.6 71.4,46.8 71.0,48.4 71.0,51.8 70.6,54.5 69.9,58.0 69.1,59.9 68.8,61.9 68.1,63.6 67.9,65.4 67.1,68.0 66.8,70.8 66.8,75.1 67.2,77.8 67.8,78.8 68.1,80.5 69.0,82.9 70.0,84.8 71.2,88.5 71.9,89.8 72.9,93.5 72.9,100.0 72.0,103.9 72.0,104.9 82.6,104.9 83.1,101.2 83.6,99.1 83.6,94.2 83.1,92.1 83.6,91.4 84.6,91.1 88.2,91.1 89.4,91.5 89.8,92.0 90.1,94.8 90.1,98.6 89.9,101.8 89.4,103.2 89.2,104.9 99.9,104.9 100.0,103.0 100.8,99.8 100.8,93.2 100.1,91.5 99.6,89.1 98.8,86.8 97.9,85.2 97.1,83.4 96.9,82.2 96.0,80.5 95.0,77.5 94.5,73.0 94.6,68.4 95.0,64.8 96.9,56.4 97.4,51.5 97.4,48.5 96.9,46.8 95.8,45.1 93.5,43.1 91.8,42.1 89.1,41.1 86.9,40.8 82.4,40.8 78.4,41.2Z M84.5,51.2 86.6,51.9 87.2,52.5 87.5,53.4 87.0,59.0 86.2,61.1 85.1,65.9 84.5,70.8 84.5,73.5 85.1,77.8 85.8,79.8 85.8,80.4 85.1,80.9 79.5,80.9 78.8,80.1 78.0,78.2 77.2,74.0 77.2,70.6 78.0,65.4 79.8,59.1 80.2,52.8 81.2,51.8 83.0,51.2Z M229.5,44.1 228.5,45.0 227.5,46.2 226.8,47.9 226.6,51.2 226.2,53.1 225.9,57.5 225.4,59.1 224.9,62.4 224.2,64.5 223.8,69.0 223.8,74.1 224.2,77.6 226.4,83.1 228.1,86.4 230.0,92.2 230.1,98.9 229.0,104.0 229.0,104.9 239.9,104.9 240.8,98.4 240.6,94.5 239.8,90.9 238.9,89.1 237.8,85.2 237.2,84.4 236.8,82.6 235.9,80.6 235.0,77.6 234.9,76.2 234.2,73.8 234.2,69.0 235.9,60.2 236.4,55.0 236.4,53.1 237.1,52.0 239.8,51.2 241.2,51.2 244.0,52.0 244.6,52.6 244.9,53.2 244.8,55.1 243.9,60.4 243.4,61.9 242.9,65.0 242.4,66.4 242.0,68.5 241.8,73.2 242.2,76.8 242.8,78.1 243.1,80.0 244.2,83.0 245.0,84.4 246.1,87.8 246.8,88.9 247.9,92.6 248.0,99.5 247.9,100.9 247.1,103.9 247.1,104.9 257.8,104.9 257.9,103.2 258.5,101.2 258.9,98.9 258.9,94.2 257.4,88.6 256.8,86.9 256.0,85.8 253.0,77.6 252.5,73.6 252.5,72.0 253.0,67.5 254.0,63.9 254.6,62.4 255.0,60.2 255.6,58.2 256.0,55.5 256.0,53.4 256.4,52.5 256.8,52.1 257.6,51.6 259.0,51.2 260.8,51.2 263.4,51.9 264.1,52.5 264.4,53.4 264.0,57.8 263.2,59.6 262.8,62.0 261.9,64.6 261.0,66.5 260.1,69.9 260.0,75.6 260.2,77.2 261.1,80.0 261.9,81.4 263.1,85.1 263.9,86.4 264.8,88.6 265.9,92.9 266.1,98.0 266.0,100.0 265.1,104.1 265.1,104.9 275.0,104.9 275.0,104.1 275.8,101.5 276.1,98.0 276.1,95.0 275.8,92.5 273.9,87.0 272.8,85.1 270.1,79.2 269.6,76.6 269.6,72.2 270.0,69.5 270.8,67.4 271.0,66.0 271.8,64.4 272.9,60.2 273.8,58.1 274.4,54.9 274.4,48.9 273.9,47.2 272.8,45.5 271.6,44.2 269.2,42.4 266.8,41.2 263.6,40.5 259.0,40.6 257.5,41.0 255.9,41.1 252.1,42.4 251.1,42.2 247.8,41.2 245.4,41.0 244.0,40.6 239.2,40.6 238.0,41.0 236.4,41.1 234.4,41.9 233.0,42.1 231.1,43.0Z M103.6,44.4 102.1,46.0 101.1,48.2 101.1,51.0 100.6,55.2 100.1,57.1 99.8,60.4 99.2,61.9 98.9,65.2 98.4,66.8 98.1,68.4 98.2,75.6 100.1,81.5 102.1,85.5 103.1,88.4 103.8,89.5 104.4,92.2 104.6,95.1 104.5,98.9 104.0,103.0 103.5,104.9 114.1,104.9 114.8,102.0 114.9,99.4 115.1,98.4 115.1,96.1 114.8,93.1 113.8,89.4 113.0,88.0 110.8,81.2 109.9,79.4 109.2,77.0 108.8,72.9 108.9,67.8 109.8,62.2 110.8,58.0 111.0,53.0 111.4,52.2 111.9,51.9 114.1,51.2 115.9,51.2 118.1,51.9 119.0,52.6 119.1,53.0 119.1,55.8 118.9,58.2 117.1,64.8 116.8,67.5 116.4,68.8 116.2,74.2 117.0,78.2 120.2,86.9 121.0,88.1 121.6,90.0 122.5,94.9 122.5,97.9 121.5,104.9 132.2,104.9 132.2,104.1 132.9,102.2 133.4,97.9 133.2,93.6 132.6,90.9 132.0,89.8 130.9,86.1 129.0,82.1 127.0,75.4 126.9,72.0 127.1,69.0 127.6,67.8 128.1,65.2 128.6,63.9 129.1,61.4 129.6,60.2 130.1,57.5 130.5,56.5 130.8,53.1 131.0,52.5 131.6,51.9 133.5,51.2 135.1,51.2 137.5,51.8 138.5,52.4 138.9,53.4 138.5,57.4 138.0,59.8 137.1,61.6 134.8,69.2 134.2,71.9 134.2,74.6 135.4,79.2 135.8,79.9 137.0,83.8 138.1,85.8 139.4,89.8 139.9,90.8 140.4,92.9 140.6,95.1 140.6,98.0 140.4,100.8 139.6,104.9 149.5,104.9 150.2,101.2 150.2,100.0 150.6,97.6 150.6,95.5 150.2,92.6 149.6,90.2 145.0,80.0 144.8,78.9 144.0,77.2 143.9,73.1 144.1,71.1 144.5,70.2 146.0,64.2 147.8,59.6 148.8,55.0 148.8,48.9 148.1,46.9 147.4,45.6 145.4,43.6 143.6,42.4 140.9,41.1 138.1,40.5 134.9,40.5 130.2,41.1 126.6,42.4 123.6,41.8 122.2,41.2 120.6,41.1 117.8,40.5 114.0,40.6 110.9,41.1 107.5,42.1 105.4,43.1Z"/></svg></a>
+    <nav class="nav" id="nav" aria-label="Principal"></nav>
+    <div class="hdr-tools">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="pt">PT</button><button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-neon btn-sm" href="#reservas" data-t="book"></a>
+      <button class="burger" type="button" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="mnav-top">
+    <a class="logo" href="#inicio" aria-label="Ramen Me"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="34.0 39.5 270.5 66.5"><path fill="currentColor" fill-rule="evenodd" d="M278.5,41.6 278.0,42.2 278.0,43.1 278.8,47.0 278.8,52.8 278.2,54.6 277.9,57.4 277.0,60.0 276.9,61.0 275.2,64.9 274.1,68.5 274.1,69.1 273.5,71.5 273.4,74.4 275.0,80.9 276.8,84.6 278.1,88.6 278.6,89.5 279.6,93.6 279.6,99.9 279.2,101.4 278.9,104.9 302.9,104.9 302.9,103.5 303.4,99.9 303.4,97.6 303.1,97.4 290.4,97.2 289.6,97.0 289.1,96.5 289.0,92.5 288.8,90.8 287.8,87.0 285.9,82.2 285.0,81.0 284.1,79.1 283.0,75.5 283.1,72.8 284.1,70.2 284.8,69.8 298.2,69.6 299.2,69.0 299.6,68.0 300.0,64.8 300.9,60.5 300.9,59.6 300.6,59.2 288.0,59.1 287.2,58.6 287.1,58.1 287.6,56.6 288.1,52.9 288.4,52.4 289.0,52.0 301.2,52.0 302.1,51.5 302.4,50.6 302.4,49.4 303.0,45.0 302.9,42.1 302.2,41.6Z M153.0,41.8 152.5,42.5 153.0,45.2 153.1,51.9 152.9,55.2 152.0,58.8 151.1,60.9 150.9,62.2 149.2,66.1 148.2,69.6 148.0,71.2 148.0,75.4 149.1,80.0 149.9,81.2 151.2,85.2 152.9,88.8 153.8,92.2 154.0,94.1 154.0,99.8 153.1,104.9 177.2,104.9 177.2,103.2 177.8,100.2 177.8,97.6 177.4,97.2 164.5,97.2 163.8,96.8 163.5,96.1 163.5,93.1 162.5,87.9 161.8,85.5 161.0,84.2 159.9,81.4 158.9,79.9 158.0,77.9 157.6,75.8 157.6,73.0 158.1,70.9 159.4,69.6 173.0,69.6 173.8,69.1 174.9,63.4 174.9,61.9 175.1,60.9 175.0,59.4 174.5,59.1 162.5,59.1 161.9,58.6 161.8,58.0 162.6,52.9 163.5,52.0 174.1,52.0 176.5,51.8 176.9,51.1 177.4,42.4 177.1,42.0 176.1,41.6Z M40.0,41.8 39.5,42.0 39.2,42.5 39.6,45.9 39.6,49.5 38.9,56.6 38.2,58.4 38.0,59.9 37.1,62.0 36.6,64.5 36.2,65.4 36.0,67.2 35.5,68.6 35.0,71.5 35.0,73.6 35.5,76.4 37.1,81.8 38.8,85.1 40.0,88.8 40.9,90.6 41.1,91.8 41.2,93.8 41.6,95.5 41.6,97.5 40.6,104.9 51.1,104.9 51.1,104.0 51.6,102.4 52.0,98.8 52.0,95.0 51.2,90.2 51.8,89.8 54.5,89.6 56.4,89.8 57.2,90.1 57.9,90.8 58.2,91.6 58.8,94.8 58.8,98.4 57.9,103.9 57.9,104.9 68.5,104.9 68.8,102.2 69.6,97.6 69.5,94.6 68.8,91.2 67.8,89.1 65.6,86.9 65.2,86.2 65.2,82.6 64.5,79.9 63.9,78.6 63.0,74.6 63.0,71.4 63.9,66.2 64.9,63.8 67.6,52.8 67.8,48.6 67.1,46.6 66.1,44.9 64.5,43.4 63.1,42.6 61.1,42.0 58.9,41.8Z M50.2,51.9 54.0,52.0 55.0,52.8 55.4,53.6 55.0,59.0 53.2,66.5 52.6,70.8 53.1,73.9 54.4,77.4 54.4,78.4 53.9,78.9 52.9,79.1 49.6,79.1 48.6,78.9 47.1,77.0 46.0,73.9 46.1,68.8 46.5,67.6 47.0,64.6 47.9,62.4 48.8,58.1 48.8,53.2 48.9,52.6 49.2,52.1Z M185.1,42.0 183.2,43.1 181.4,45.4 180.4,47.8 180.0,49.8 179.9,51.9 179.2,54.1 178.9,56.5 178.0,59.1 176.2,69.6 176.4,74.2 176.9,75.9 177.2,78.4 177.8,79.6 178.1,81.9 178.9,84.0 179.2,86.2 179.8,87.6 180.1,90.5 181.0,94.1 181.0,99.4 180.0,104.9 190.8,104.9 190.9,103.6 191.4,101.9 191.8,99.4 191.8,93.8 191.0,90.5 189.9,87.5 188.9,83.6 188.1,82.0 186.9,77.9 186.8,76.2 186.4,75.0 186.2,71.1 187.1,65.9 187.8,64.1 188.0,62.6 188.6,61.4 189.5,57.2 189.8,52.8 190.0,52.2 190.8,51.6 192.9,50.9 193.9,50.9 195.4,51.6 196.0,52.2 196.2,53.2 196.1,56.6 195.9,58.0 195.0,60.9 194.0,65.6 193.0,68.8 192.8,71.0 192.8,74.4 193.2,77.1 193.9,78.5 195.1,83.5 195.9,85.1 196.9,88.1 197.0,89.2 198.0,92.6 198.4,95.8 198.4,97.6 198.0,101.1 197.2,104.9 208.0,104.9 208.9,99.2 208.9,95.4 208.6,93.1 207.9,90.4 207.0,88.2 205.8,84.2 205.0,83.0 204.0,80.2 203.9,79.4 203.1,77.5 202.6,74.9 202.6,69.9 203.0,67.1 203.8,64.5 204.0,62.6 204.6,60.8 205.0,58.6 205.8,56.8 206.5,52.1 206.5,47.5 206.0,45.6 205.5,44.8 203.8,42.9 202.2,42.0 199.5,41.1 198.4,41.1 196.5,40.8 191.0,40.8 190.0,41.0 187.9,41.1Z M75.6,42.1 74.1,43.0 72.5,44.6 71.4,46.8 71.0,48.4 71.0,51.8 70.6,54.5 69.9,58.0 69.1,59.9 68.8,61.9 68.1,63.6 67.9,65.4 67.1,68.0 66.8,70.8 66.8,75.1 67.2,77.8 67.8,78.8 68.1,80.5 69.0,82.9 70.0,84.8 71.2,88.5 71.9,89.8 72.9,93.5 72.9,100.0 72.0,103.9 72.0,104.9 82.6,104.9 83.1,101.2 83.6,99.1 83.6,94.2 83.1,92.1 83.6,91.4 84.6,91.1 88.2,91.1 89.4,91.5 89.8,92.0 90.1,94.8 90.1,98.6 89.9,101.8 89.4,103.2 89.2,104.9 99.9,104.9 100.0,103.0 100.8,99.8 100.8,93.2 100.1,91.5 99.6,89.1 98.8,86.8 97.9,85.2 97.1,83.4 96.9,82.2 96.0,80.5 95.0,77.5 94.5,73.0 94.6,68.4 95.0,64.8 96.9,56.4 97.4,51.5 97.4,48.5 96.9,46.8 95.8,45.1 93.5,43.1 91.8,42.1 89.1,41.1 86.9,40.8 82.4,40.8 78.4,41.2Z M84.5,51.2 86.6,51.9 87.2,52.5 87.5,53.4 87.0,59.0 86.2,61.1 85.1,65.9 84.5,70.8 84.5,73.5 85.1,77.8 85.8,79.8 85.8,80.4 85.1,80.9 79.5,80.9 78.8,80.1 78.0,78.2 77.2,74.0 77.2,70.6 78.0,65.4 79.8,59.1 80.2,52.8 81.2,51.8 83.0,51.2Z M229.5,44.1 228.5,45.0 227.5,46.2 226.8,47.9 226.6,51.2 226.2,53.1 225.9,57.5 225.4,59.1 224.9,62.4 224.2,64.5 223.8,69.0 223.8,74.1 224.2,77.6 226.4,83.1 228.1,86.4 230.0,92.2 230.1,98.9 229.0,104.0 229.0,104.9 239.9,104.9 240.8,98.4 240.6,94.5 239.8,90.9 238.9,89.1 237.8,85.2 237.2,84.4 236.8,82.6 235.9,80.6 235.0,77.6 234.9,76.2 234.2,73.8 234.2,69.0 235.9,60.2 236.4,55.0 236.4,53.1 237.1,52.0 239.8,51.2 241.2,51.2 244.0,52.0 244.6,52.6 244.9,53.2 244.8,55.1 243.9,60.4 243.4,61.9 242.9,65.0 242.4,66.4 242.0,68.5 241.8,73.2 242.2,76.8 242.8,78.1 243.1,80.0 244.2,83.0 245.0,84.4 246.1,87.8 246.8,88.9 247.9,92.6 248.0,99.5 247.9,100.9 247.1,103.9 247.1,104.9 257.8,104.9 257.9,103.2 258.5,101.2 258.9,98.9 258.9,94.2 257.4,88.6 256.8,86.9 256.0,85.8 253.0,77.6 252.5,73.6 252.5,72.0 253.0,67.5 254.0,63.9 254.6,62.4 255.0,60.2 255.6,58.2 256.0,55.5 256.0,53.4 256.4,52.5 256.8,52.1 257.6,51.6 259.0,51.2 260.8,51.2 263.4,51.9 264.1,52.5 264.4,53.4 264.0,57.8 263.2,59.6 262.8,62.0 261.9,64.6 261.0,66.5 260.1,69.9 260.0,75.6 260.2,77.2 261.1,80.0 261.9,81.4 263.1,85.1 263.9,86.4 264.8,88.6 265.9,92.9 266.1,98.0 266.0,100.0 265.1,104.1 265.1,104.9 275.0,104.9 275.0,104.1 275.8,101.5 276.1,98.0 276.1,95.0 275.8,92.5 273.9,87.0 272.8,85.1 270.1,79.2 269.6,76.6 269.6,72.2 270.0,69.5 270.8,67.4 271.0,66.0 271.8,64.4 272.9,60.2 273.8,58.1 274.4,54.9 274.4,48.9 273.9,47.2 272.8,45.5 271.6,44.2 269.2,42.4 266.8,41.2 263.6,40.5 259.0,40.6 257.5,41.0 255.9,41.1 252.1,42.4 251.1,42.2 247.8,41.2 245.4,41.0 244.0,40.6 239.2,40.6 238.0,41.0 236.4,41.1 234.4,41.9 233.0,42.1 231.1,43.0Z M103.6,44.4 102.1,46.0 101.1,48.2 101.1,51.0 100.6,55.2 100.1,57.1 99.8,60.4 99.2,61.9 98.9,65.2 98.4,66.8 98.1,68.4 98.2,75.6 100.1,81.5 102.1,85.5 103.1,88.4 103.8,89.5 104.4,92.2 104.6,95.1 104.5,98.9 104.0,103.0 103.5,104.9 114.1,104.9 114.8,102.0 114.9,99.4 115.1,98.4 115.1,96.1 114.8,93.1 113.8,89.4 113.0,88.0 110.8,81.2 109.9,79.4 109.2,77.0 108.8,72.9 108.9,67.8 109.8,62.2 110.8,58.0 111.0,53.0 111.4,52.2 111.9,51.9 114.1,51.2 115.9,51.2 118.1,51.9 119.0,52.6 119.1,53.0 119.1,55.8 118.9,58.2 117.1,64.8 116.8,67.5 116.4,68.8 116.2,74.2 117.0,78.2 120.2,86.9 121.0,88.1 121.6,90.0 122.5,94.9 122.5,97.9 121.5,104.9 132.2,104.9 132.2,104.1 132.9,102.2 133.4,97.9 133.2,93.6 132.6,90.9 132.0,89.8 130.9,86.1 129.0,82.1 127.0,75.4 126.9,72.0 127.1,69.0 127.6,67.8 128.1,65.2 128.6,63.9 129.1,61.4 129.6,60.2 130.1,57.5 130.5,56.5 130.8,53.1 131.0,52.5 131.6,51.9 133.5,51.2 135.1,51.2 137.5,51.8 138.5,52.4 138.9,53.4 138.5,57.4 138.0,59.8 137.1,61.6 134.8,69.2 134.2,71.9 134.2,74.6 135.4,79.2 135.8,79.9 137.0,83.8 138.1,85.8 139.4,89.8 139.9,90.8 140.4,92.9 140.6,95.1 140.6,98.0 140.4,100.8 139.6,104.9 149.5,104.9 150.2,101.2 150.2,100.0 150.6,97.6 150.6,95.5 150.2,92.6 149.6,90.2 145.0,80.0 144.8,78.9 144.0,77.2 143.9,73.1 144.1,71.1 144.5,70.2 146.0,64.2 147.8,59.6 148.8,55.0 148.8,48.9 148.1,46.9 147.4,45.6 145.4,43.6 143.6,42.4 140.9,41.1 138.1,40.5 134.9,40.5 130.2,41.1 126.6,42.4 123.6,41.8 122.2,41.2 120.6,41.1 117.8,40.5 114.0,40.6 110.9,41.1 107.5,42.1 105.4,43.1Z"/></svg></a>
+    <button class="mnav-close" type="button" id="mclose" aria-label="Fechar">×</button>
+  </div>
+  <ul id="mlinks"></ul>
+  <div class="mnav-foot">
+    <span class="status" data-status><i></i><b></b></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="pt">Português</button><button type="button" data-lang="en">English</button>
+    </div>
+    <span>Rua da Picaria 20 · 4050-477 Porto</span>
+    <span>+351 22 323 5090</span>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<footer class="foot" id="foot"></footer>
+
+<button class="tray-btn" id="trayBtn" type="button" hidden><span class="cnt" id="trayCnt">0</span><span id="trayLbl"></span></button>
+<div id="layer"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const LOGO_FULL = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="34.0 39.5 270.5 123.0"><path fill="currentColor" fill-rule="evenodd" d="M213.2,154.4 213.2,155.4 213.4,155.6 214.0,155.9 215.1,155.9 217.1,156.2 218.6,156.8 220.1,156.9 222.9,157.8 225.0,158.0 227.0,158.6 228.1,158.8 233.5,160.6 234.4,160.6 234.9,160.1 236.0,157.2 236.0,156.6 235.6,156.1 231.0,154.9 229.1,154.1 224.6,153.1 222.5,152.9 220.9,152.2 215.8,151.2 214.8,151.4 214.2,151.9 213.8,153.5Z M98.1,143.6 98.1,147.6 98.4,148.1 98.9,148.4 126.1,148.4 126.5,148.2 127.0,147.6 127.0,143.6 126.5,143.1 99.2,143.0 98.4,143.2Z M215.0,144.5 215.2,145.4 215.6,145.6 219.0,146.0 220.8,146.5 223.4,146.9 225.8,147.8 231.2,149.0 232.2,149.5 232.8,149.5 233.4,149.1 233.9,147.6 234.6,146.2 234.6,145.5 234.2,145.1 232.1,144.4 229.4,143.9 226.8,143.1 225.5,143.0 222.2,142.0 219.1,141.6 218.0,141.2 216.8,141.2 216.4,141.5Z M64.0,141.6 64.0,144.2 64.1,144.6 64.6,145.0 84.4,145.0 85.0,145.5 85.0,146.1 84.4,147.5 82.5,150.4 79.6,153.0 76.9,154.8 75.1,155.6 71.9,156.8 70.5,157.0 70.0,157.4 70.2,158.2 72.6,160.8 73.4,161.0 75.0,160.8 77.5,159.8 78.1,159.2 81.2,157.6 83.6,155.8 86.9,152.4 88.5,149.8 89.8,147.4 90.1,145.9 91.4,143.0 91.4,142.4 91.1,142.0 88.6,140.8 64.8,140.8 64.1,141.2Z M195.4,138.6 195.0,138.4 194.4,138.4 191.9,142.2 189.1,145.5 186.2,148.2 182.6,150.9 179.9,152.2 179.2,152.8 177.1,153.6 174.9,154.2 173.5,154.9 169.1,155.9 168.8,156.4 168.9,156.9 170.9,160.0 171.5,160.5 174.4,160.0 180.5,157.8 185.8,154.9 186.9,153.9 188.9,152.6 194.2,147.2 195.8,145.4 197.1,143.1 197.1,141.8Z M266.8,133.1 265.9,133.2 261.5,137.6 258.0,140.6 255.0,142.8 249.1,145.9 245.8,147.1 245.2,147.8 245.2,148.4 246.2,150.9 246.9,151.4 247.4,151.4 249.5,150.6 255.2,147.8 256.1,147.5 256.6,147.9 256.6,160.1 256.9,160.9 257.6,161.4 260.2,161.4 260.6,161.2 261.2,160.5 261.4,144.1 262.9,142.2 266.8,138.9 269.2,136.2 269.2,135.4Z M172.4,132.9 170.0,135.2 170.0,136.2 174.6,140.0 177.5,142.9 178.2,143.2 178.6,143.1 181.5,140.1 181.4,139.2 177.0,135.5 173.8,133.0 173.1,132.8Z M67.4,133.1 67.4,135.5 67.6,136.2 68.2,136.6 88.0,136.6 88.6,136.0 88.6,132.8 88.0,132.1 68.2,132.1 67.5,132.6Z M158.0,133.1 155.0,131.9 153.4,132.0 153.1,132.4 152.8,134.4 149.9,141.1 148.6,142.6 147.9,142.5 143.4,139.2 141.0,137.9 139.9,137.0 139.0,137.0 136.6,139.8 136.6,140.5 137.0,140.9 139.0,142.0 144.5,146.0 145.2,146.8 145.4,147.5 142.1,150.9 140.0,152.8 136.2,155.4 134.6,156.1 132.9,157.2 132.9,157.9 135.5,160.4 136.2,160.8 136.8,160.8 138.4,159.9 139.4,159.0 141.5,157.8 144.8,155.1 149.2,150.5 150.2,150.8 157.0,157.5 157.6,157.5 160.0,155.0 160.5,154.2 160.4,153.2 157.5,150.4 154.4,147.8 153.1,146.5 152.9,146.0 153.0,145.1 155.0,141.8 158.2,134.1 158.2,133.4Z M216.6,135.0 216.8,135.6 217.4,136.0 219.2,136.1 220.5,136.5 224.1,137.0 225.4,137.5 231.6,138.9 234.9,139.9 235.5,139.8 235.8,139.5 237.0,136.5 236.9,135.9 236.4,135.4 235.2,135.0 222.8,132.1 219.9,131.8 218.5,131.8 218.0,132.0 217.2,133.1Z M278.5,41.6 278.0,42.2 278.0,43.1 278.8,47.0 278.8,52.8 277.6,58.4 277.2,59.1 276.8,61.4 275.2,64.9 274.2,68.0 273.4,72.5 273.5,75.2 274.0,76.8 274.2,78.4 275.0,80.9 276.8,84.6 278.1,88.6 278.6,89.5 279.6,93.6 279.6,99.9 279.2,101.4 279.0,104.0 278.2,106.4 278.2,107.1 278.8,107.6 301.5,107.6 302.0,107.4 302.4,106.9 302.8,105.6 303.4,99.9 303.4,97.6 302.9,97.2 290.4,97.2 289.6,97.0 289.1,96.5 289.0,92.5 288.5,89.8 286.8,84.2 285.8,82.0 284.8,80.5 283.6,77.8 283.0,75.5 283.0,73.4 284.1,70.2 285.1,69.6 298.2,69.6 299.2,69.0 299.6,68.0 300.0,64.8 300.9,60.5 300.9,59.6 300.6,59.2 288.0,59.1 287.2,58.6 287.1,58.1 287.6,56.6 288.1,52.9 288.4,52.4 289.0,52.0 301.2,52.0 302.1,51.5 302.4,50.6 302.4,49.4 303.0,45.0 302.9,42.1 302.2,41.6Z M153.0,41.8 152.5,42.5 153.0,45.2 153.1,51.9 152.8,56.0 152.0,58.8 151.1,60.9 150.8,62.6 149.0,66.9 148.0,71.2 148.0,75.4 148.5,77.9 149.1,80.0 149.9,81.2 151.2,85.2 152.9,88.8 153.9,93.0 154.0,99.8 153.5,103.2 153.1,104.5 152.9,107.1 153.4,107.6 176.2,107.6 176.9,107.0 177.1,105.8 177.2,103.2 177.8,100.2 177.8,97.6 177.4,97.2 164.5,97.2 163.8,96.8 163.5,96.1 163.5,93.1 162.5,87.9 161.8,85.5 161.0,84.2 159.9,81.4 158.9,79.9 158.0,77.9 157.6,75.8 157.6,73.0 158.1,70.9 159.4,69.6 173.0,69.6 173.8,69.1 174.9,63.4 174.9,61.9 175.1,60.9 175.0,59.4 174.5,59.1 162.5,59.1 161.9,58.6 161.8,58.0 162.6,52.9 163.5,52.0 174.1,52.0 176.5,51.8 176.9,51.1 177.4,42.4 177.1,42.0 176.1,41.6Z M40.0,41.8 39.5,42.0 39.2,42.5 39.6,45.9 39.6,49.5 38.9,56.6 38.2,58.4 38.0,59.9 37.1,62.0 36.6,64.5 36.2,65.4 36.0,67.2 35.5,68.6 35.0,71.5 35.1,74.8 36.0,77.6 36.1,78.6 37.1,81.8 38.8,85.1 40.0,88.8 40.9,90.6 41.1,91.8 41.2,93.8 41.6,95.5 41.6,97.5 41.2,99.4 41.0,102.9 40.1,105.8 40.0,107.0 40.5,107.6 49.8,107.6 50.5,107.2 50.9,106.2 51.1,104.1 51.6,102.4 52.0,98.8 52.0,95.0 51.2,90.2 51.8,89.8 54.9,89.6 56.8,89.9 57.9,90.8 58.2,91.6 58.6,93.8 58.8,98.4 58.0,103.9 57.2,106.1 57.2,107.2 57.8,107.6 67.1,107.6 67.9,106.9 68.6,103.9 68.8,102.2 69.6,97.6 69.5,94.6 68.8,91.2 67.8,89.1 65.6,86.9 65.2,86.2 65.2,82.6 64.5,79.9 63.9,78.6 63.0,74.6 63.0,71.4 63.9,66.2 64.9,63.8 67.6,52.8 67.8,48.6 67.1,46.6 66.1,44.9 64.5,43.4 63.1,42.6 61.1,42.0 58.9,41.8Z M50.2,51.9 54.0,52.0 55.0,52.8 55.4,53.6 55.0,59.0 53.2,66.5 52.6,70.8 53.1,73.9 54.4,77.4 54.4,78.4 53.9,78.9 52.9,79.1 49.6,79.1 48.6,78.9 47.1,77.0 46.0,73.9 46.1,68.8 46.5,67.6 47.0,64.6 47.9,62.4 48.8,58.1 48.8,53.2 48.9,52.6 49.2,52.1Z M187.4,41.2 185.1,42.0 183.2,43.1 181.6,45.0 180.8,46.6 180.1,48.9 180.0,51.1 179.2,54.1 179.1,55.5 178.0,59.1 177.0,64.5 176.8,67.1 176.4,68.5 176.4,74.2 176.9,75.9 177.2,78.4 177.8,79.6 178.1,81.9 178.9,84.0 179.2,86.2 179.8,87.6 180.1,90.5 181.0,94.1 181.0,99.4 179.9,105.2 179.8,107.1 180.2,107.6 189.2,107.6 190.0,107.0 190.5,105.9 191.8,99.4 191.8,93.8 191.0,90.5 189.9,87.5 188.9,83.6 188.1,82.0 186.9,77.9 186.8,76.2 186.4,75.0 186.2,71.1 187.1,65.9 187.8,64.1 188.0,62.6 188.6,61.4 189.5,57.2 189.8,52.8 190.0,52.2 191.0,51.5 192.9,50.9 193.9,50.9 195.0,51.4 196.0,52.2 196.2,54.1 195.9,58.0 195.0,60.9 194.0,65.6 193.0,68.8 192.8,71.0 192.8,74.4 193.2,77.1 193.9,78.5 195.1,83.5 195.9,85.1 196.9,88.1 197.0,89.2 197.8,91.5 198.1,93.5 198.4,97.6 197.9,101.9 197.0,105.5 197.0,107.1 197.5,107.6 206.5,107.6 207.5,106.9 208.6,101.6 208.9,99.2 208.8,93.9 207.9,90.4 207.0,88.2 206.5,86.4 204.0,80.2 203.9,79.4 203.1,77.5 202.6,74.9 202.6,69.9 203.0,67.1 203.8,64.5 204.0,62.6 204.6,60.8 205.0,58.6 205.8,56.8 206.5,52.1 206.5,47.5 206.2,46.4 205.5,44.8 203.8,42.9 202.2,42.0 200.0,41.2 196.5,40.8 191.0,40.8Z M75.6,42.1 74.1,43.0 72.5,44.6 71.4,46.8 71.0,48.4 71.0,51.8 70.6,54.5 69.9,58.0 69.1,59.9 68.8,61.9 68.1,63.6 67.9,65.4 67.1,68.0 66.8,70.8 66.8,75.1 67.2,77.8 67.8,78.8 68.1,80.5 69.0,82.9 70.0,84.8 71.2,88.5 71.9,89.8 72.9,93.5 72.9,100.0 71.4,107.0 72.0,107.6 81.6,107.5 82.1,106.8 82.6,104.9 83.1,101.2 83.6,99.1 83.6,94.2 83.1,92.6 83.2,91.8 83.9,91.2 84.6,91.1 88.2,91.1 88.9,91.2 89.6,91.8 89.9,92.4 90.1,94.8 90.1,98.6 89.9,101.8 88.9,105.8 88.9,107.2 89.2,107.6 98.5,107.6 99.1,107.1 99.6,105.9 100.0,103.0 100.6,100.6 100.9,97.6 100.8,93.2 100.1,91.5 99.6,89.1 98.8,86.8 97.9,85.2 97.1,83.4 96.9,82.2 96.0,80.5 95.0,77.5 94.5,73.0 94.6,68.4 95.0,64.8 96.9,56.4 97.4,51.5 97.4,48.5 96.9,46.8 95.8,45.1 93.5,43.1 91.8,42.1 89.1,41.1 86.9,40.8 82.4,40.8 78.4,41.2Z M84.5,51.2 86.6,51.9 87.2,52.5 87.5,53.4 87.0,59.0 86.2,61.1 85.1,65.9 84.5,70.8 84.5,73.5 85.1,77.8 85.8,79.8 85.8,80.4 85.1,80.9 79.5,80.9 78.8,80.1 78.0,78.2 77.2,74.0 77.2,70.6 78.0,65.4 79.8,59.1 80.2,52.8 81.2,51.8 83.0,51.2Z M231.1,43.0 228.5,45.0 227.2,46.6 226.8,47.9 226.6,51.2 226.2,53.1 225.9,57.5 225.4,59.1 224.9,62.4 224.2,64.5 223.8,69.0 223.8,74.1 224.2,77.6 226.4,83.1 228.1,86.4 230.0,92.2 230.1,98.9 229.0,104.0 228.6,106.4 228.8,107.2 229.4,107.6 238.4,107.6 238.9,107.2 239.8,105.2 240.6,100.0 240.6,94.5 239.8,90.9 238.9,89.1 237.8,85.2 237.2,84.4 236.8,82.6 235.9,80.6 235.0,77.6 234.9,76.2 234.2,73.8 234.2,69.0 235.9,60.2 236.4,55.0 236.4,53.1 237.1,52.0 239.8,51.2 241.2,51.2 244.0,52.0 244.6,52.6 244.9,53.2 244.8,55.1 243.9,60.4 243.4,61.9 242.9,65.0 242.4,66.4 242.0,68.5 241.8,73.2 242.2,76.8 242.8,78.1 243.1,80.0 244.2,83.0 245.0,84.4 246.1,87.8 246.8,88.9 247.9,92.6 248.0,99.5 247.6,102.1 246.6,106.2 246.6,107.2 247.1,107.6 256.4,107.6 256.9,107.4 257.1,107.0 257.6,105.5 257.9,103.2 258.8,99.9 258.9,94.2 257.4,88.6 256.8,86.9 256.0,85.8 253.0,77.6 252.5,73.6 252.5,72.0 253.0,67.5 254.0,63.9 254.6,62.4 255.0,60.2 255.6,58.2 256.1,53.0 256.8,52.1 257.6,51.6 259.0,51.2 260.8,51.2 263.6,52.0 264.1,52.5 264.4,53.4 264.0,57.8 263.2,59.6 262.8,62.0 261.9,64.6 261.0,66.5 260.1,69.9 260.0,75.6 260.2,77.2 261.1,80.0 261.9,81.4 263.1,85.1 263.9,86.4 264.8,88.6 265.9,92.9 266.1,95.5 266.0,100.0 265.0,104.8 264.8,107.0 265.4,107.6 273.6,107.6 274.1,107.4 274.8,106.1 274.9,104.8 275.9,100.6 276.1,98.0 276.0,94.0 275.6,92.0 274.9,90.1 274.8,89.2 273.9,87.0 272.8,85.1 270.1,79.2 269.6,76.6 269.6,72.2 270.0,69.5 270.8,67.4 271.0,66.0 271.8,64.4 272.9,60.2 273.8,58.1 274.4,54.9 274.4,48.9 274.1,47.9 273.4,46.4 271.6,44.2 269.2,42.4 266.8,41.2 263.6,40.5 259.0,40.6 257.5,41.0 255.9,41.1 252.1,42.4 247.1,41.1 245.4,41.0 242.9,40.5 240.5,40.5 235.9,41.2 234.4,41.9 233.0,42.1Z M105.0,43.4 103.6,44.4 102.4,45.6 101.1,48.2 101.1,51.0 100.6,55.2 100.1,57.1 99.8,60.4 99.2,61.9 98.9,65.2 98.4,66.8 98.1,68.4 98.2,75.6 100.1,81.5 102.1,85.5 103.1,88.4 103.8,89.5 104.5,93.1 104.5,98.9 104.0,103.0 103.0,106.2 103.1,107.4 103.5,107.6 112.8,107.6 113.6,107.0 114.0,105.9 114.1,104.5 114.8,102.0 114.9,99.4 115.1,98.4 115.1,96.1 114.8,93.1 113.8,89.4 113.0,88.0 110.8,81.2 110.1,80.1 109.4,77.5 108.9,74.8 108.8,69.9 109.2,65.0 110.8,58.0 111.0,53.0 111.4,52.2 111.9,51.9 114.1,51.2 115.9,51.2 118.1,51.9 119.0,52.6 119.1,53.0 119.1,55.8 118.9,58.2 117.1,64.8 116.8,67.5 116.4,68.8 116.2,74.2 117.0,78.2 120.2,86.9 121.0,88.1 121.9,91.0 122.4,93.8 122.4,99.5 121.8,103.8 121.1,106.1 121.2,107.4 121.6,107.6 130.6,107.6 131.5,107.1 131.9,105.2 132.9,102.2 133.2,99.5 133.2,93.6 132.6,90.9 132.0,89.8 130.6,85.5 130.0,84.5 129.0,82.1 127.2,76.5 126.9,73.8 127.0,69.8 130.5,56.5 130.9,52.8 131.9,51.8 133.5,51.2 135.1,51.2 137.5,51.8 138.2,52.1 138.9,53.4 138.5,57.4 138.0,59.8 137.1,61.6 134.8,69.2 134.2,71.9 134.2,74.6 135.4,79.2 135.8,79.9 137.0,83.8 138.1,85.8 139.4,89.8 139.9,90.8 140.4,92.9 140.6,95.1 140.5,99.6 139.9,103.8 139.1,106.1 139.1,107.2 139.6,107.6 148.4,107.5 148.8,107.1 149.5,104.9 150.2,101.2 150.2,100.0 150.6,97.6 150.6,95.5 150.2,92.6 149.6,90.2 145.0,80.0 144.8,78.9 144.0,77.2 143.9,73.1 144.1,71.1 144.5,70.2 146.0,64.2 147.8,59.6 148.8,55.0 148.8,48.9 148.1,46.9 147.4,45.6 145.4,43.6 143.6,42.4 140.9,41.1 138.1,40.5 134.9,40.5 130.2,41.1 126.6,42.4 121.6,41.1 120.6,41.1 117.8,40.5 115.4,40.5 110.4,41.2 107.5,42.1Z"/></svg>`;
+const MASCOT = `<svg class="mascot" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f6f0e6"/><circle cx="60" cy="60" r="58" fill="none" stroke="#130404" stroke-width="2"/><g fill="none" stroke="#130404" stroke-width="3.2" stroke-linecap="round"><path d="M46 14c-4 5 4 9 0 14s4 9 0 14 4 9 0 14 4 9 0 14"/><path d="M58 12c-4 5 4 9 0 14s4 9 0 14 4 9 0 14 4 9 0 14 4 6 0 10"/><path d="M70 14c-4 5 4 9 0 14s4 9 0 14 4 9 0 14 4 9 0 14"/></g><circle cx="53" cy="56" r="9" fill="#fff" stroke="#130404" stroke-width="3"/><circle cx="72" cy="51" r="9" fill="#fff" stroke="#130404" stroke-width="3"/><circle cx="57" cy="55" r="4.2" fill="#130404"/><circle cx="76" cy="50" r="4.2" fill="#130404"/><path d="M22 108c4-18 14-26 26-28h24c12 2 22 10 26 28a58 58 0 0 1-76 0z" fill="#130404"/><path d="M46 80l14 12 14-12-3-6H49z" fill="#fff" stroke="#130404" stroke-width="2.5" stroke-linejoin="round"/><path d="M58 92h4v20h-4z" fill="#fff"/><path d="M32 98l3 9M88 98l-3 9" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>`;
+
+/* ================= i18n ================= */
+const T = {
+pt:{
+  nav:{inicio:"Início",menu:"Menu",reservas:"Reservas",beats:"W/ Beats",uber:"Uber Eats",sobre:"Sobre nós",contacto:"Contacto"},
+  book:"Reservar",bookTable:"Reservar mesa",seeMenu:"Ver o menu",fullMenu:"Menu completo",
+  open:"Aberto agora",closesAt:"fecha às",closed:"Fechado",opensAt:"abre às",barOpen:"Bar aberto",tomorrow:"amanhã",
+  ticker:["Primeiro o caldo","Massa puxada ao balcão","Chef japonês","R&B até fechar","Rua da Picaria 20","Esplanada","2 ramens veganos","DJ sexta & sábado"],
+  heroL1:"Primeiro o caldo.",heroL2:"Depois o resto.",
+  heroLead:"Um pequeno bar de ramen a dois passos dos Aliados. Chef japonês, trinta lugares, esplanada, luz baixa e R&B a tocar até fechar.",
+  stickerHot:"Pica. Avisámos.",
+  stats:[["9.4","Classificação TheFork"],["30","Lugares, balcão incluído"],["8","Ramens, dois deles veganos"],["2024","Ano em que abrimos"]],
+  aboutEy:"Sobre nós",aboutH:"Ramen a sério, numa sala que não se leva a sério.",
+  aboutP:["O caldo ferve horas antes do serviço e a massa é puxada ao balcão. Nessa parte somos rigorosos. No resto (a música, a esplanada, a mesa ao lado) queremos que seja fácil.","O nosso chef é japonês e isso nota-se na tigela. Mas estamos no Porto, por isso há chouriço no tantanmen e pimentos de padrón por cima. Ninguém em Tóquio reconheceria. Aqui todos pedem duas vezes.","A cinco minutos do metro da Trindade, a dois dos Aliados. Não é preciso reservar, mas o balcão enche depressa ao fim de semana."],
+  stk1:"Massa puxada ao balcão",stk2:"Feito no Porto",
+  railEy:"O menu",railH:"Oito tigelas. Escolhe a tua.",railP:"Caldo de frango e porco ou vegano, hoso-men fino e direito. Toca numa tigela para ver tudo o que leva.",
+  beatsEy:"W/ Beats · DJ ao vivo",beatsNext:"Próxima noite",beatsH:"Sexta e sábado há DJ atrás do balcão.",beatsAll:"Ver agenda",
+  cd:["dias","horas","min","seg"],live:"A tocar agora",
+  roomEy:"A sala",roomH:"Luz baixa. R&B antigo. Sem pretensão.",
+  roomP:"Lugares ao balcão junto à cozinha aberta, se quiseres ver a massa a ser puxada. Mesas, se preferires conversar. Em algumas noites, um DJ ao vivo.",
+  quote:"O chef é japonês, e isso nota-se. Este é um dos ramens mais autênticos da cidade.",quoteBy:"Avaliação de um cliente",
+  igEy:"@ramenme.pt",igH:"Tudo o que cozinhamos aparece aqui primeiro.",igBtn:"Seguir no Instagram",
+  newsEy:"Newsletter",newsH:"Um email por mês. Não mais.",newsP:"Novas tigelas, noites de DJ e algum dia de fecho.",newsPh:"o-teu@email.com",newsBtn:"Subscrever",newsOk:"Inscrição registada nesta pré-visualização.",
+  newsPriv:"Usamos o teu email só para enviar a newsletter.",
+  ctaH:"Vem com fome.",hoursLine:"Todos os dias · 12h00–15h00 · 18h30–22h30",
+  /* menu */
+  menuEy:"O menu",menuH:"Cada tigela, por inteiro.",menuP:"Caldo, proteína, toppings e preço de tudo o que servimos. Preços com IVA incluído. Toca num prato para ver o detalhe e junta-o ao teu talão.",
+  cats:{all:"Tudo",ramen:"Ramens",starters:"Entradas",don:"Donburi",dessert:"Sobremesas",drinks:"Bebidas"},
+  catJp:{ramen:"ラーメン",starters:"前菜",don:"丼",dessert:"デザート",drinks:"飲み物"},
+  catP:{ramen:"Um óleo aromatizado +€1,20 · óleo chili ou óleo chili com alho.",starters:"Gyoza feita à mão, frituras e molhos.",don:"Arroz japonês com proteína e toppings por cima.",dessert:"Duas sobremesas, e só duas.",drinks:"Cocktails, saké, vinho do Porto e o resto."},
+  fVeg:"Vegan",fHot:"Picante",search:"Pesquisar no menu",empty:"Nada com esse nome. Tenta \"miso\" ou \"gyoza\".",
+  broth:"Caldo",protein:"Proteína",toppings:"Toppings",noodle:"Massa",desc:"Descrição",
+  bPork:"Frango e porco",bVeg:"Vegano",noodleTxt:"Hoso-men, noodle fino e direito",
+  oil:"Óleo chili com alho +€1,20",add:"Juntar ao talão",added:"Junto ao talão",
+  tray:"O teu talão",trayTitle:"Talão",trayNote:"O talão ajuda-te a escolher. O pedido faz-se à mesa ou no Uber Eats.",trayEmpty:"Ainda vazio. Escolhe uma tigela.",total:"Total",clear:"Limpar",copyTicket:"Copiar talão",copied:"Copiado",withOil:"+ óleo chili",
+  allergH:"Alergénios",allergP:"A tabela completa de alergénios de todos os pratos está disponível em PDF e em papel no restaurante. Se tens alergia ou intolerância, diz-nos antes de pedires. Devido à possibilidade de contaminação cruzada, todos os pratos podem conter vestígios alergénicos.",allergBtn:"Tabela de alergénios (PDF)",
+  water:"Preocupados com a nossa pegada ecológica, usamos água filtrada EAU.",sakeNote:"A seleção de saké pode variar, pergunta ao teu empregado de mesa.",
+  menuCta:"Escolhe a tigela. Guardamos-te um lugar.",orderUber:"Pedir no Uber Eats",
+  /* reservas */
+  resEy:"Reservas",resH:"Trinta lugares. Diz-nos quando.",resP:"Podes aparecer sem reservar, mas o balcão enche depressa a partir de quinta. Manda-nos o pedido e respondemos no mesmo dia.",
+  fName:"Nome",fContact:"Email ou telefone",fDate:"Data",fPeople:"Pessoas",fTime:"Hora",fNote:"Algo que devamos saber",fNotePh:"Esplanada, cadeira alta, aniversário…",lunch:"Almoço",dinner:"Jantar",
+  send:"Enviar pedido",sameDay:"Respondemos no mesmo dia",
+  eName:"Diz-nos o teu nome.",eContact:"Precisamos de um email ou telefone.",eTime:"Escolhe uma hora.",
+  resOkH:"Pedido pronto",resOkP:"Num site em produção este pedido segue diretamente para a equipa. Nesta pré-visualização nada foi enviado: copia o pedido ou liga-nos.",newReq:"Novo pedido",
+  callP:"Preferes falar? Liga para o +351 22 323 5090 durante o horário de serviço. Grupos de dez ou mais: escreve-nos e montamos um menu fixo.",
+  hoursH:"Horário",hrs:[["Almoço · todos os dias","12h00–15h00"],["Jantar · todos os dias","18h30–22h30"],["Bar · sextas","até à 01h00"]],lastOrders:"Últimos pedidos trinta minutos antes de fechar.",
+  goodH:"Bom saber",good:["Esplanada aberta quando o tempo deixa. Pede na reserva.","Dois ramens veganos e gyoza vegan no menu.","Temos cadeiras altas.","A cinco minutos do metro da Trindade, a dois dos Aliados."],
+  uberEy:"Entrega e takeaway",uberH:"O ramen viaja mal. Nós embalamos para que não.",uberP:"Caldo, massa e toppings vão em recipientes separados. Montas a tigela em casa para a massa chegar al dente. Disponível no Uber Eats durante o horário de serviço.",
+  takeaway:"Takeaway: +351 22 323 5090",zoneL:"Zona de entrega",zone:"Baixa, Cedofeita, Boavista",pickL:"Recolha ao balcão",pick:"Pronto em 15 a 20 min",
+  steps:[["Caldo","Vai a ferver, à parte."],["Massa","Separada, para não amolecer."],["Toppings","Montas tudo por cima em casa."]],
+  doorH:"Rua da Picaria 20. A porta vermelha.",map:"Ver no mapa",
+  /* beats */
+  beatsH1:"Música ao vivo, sexta e sábado.",beatsP:"Um DJ diferente atrás do balcão, com hip-hop, R&B e groove até fechar. Reserva mesa e vem ouvir.",
+  upcoming:"Próximas noites",pastH:"Já passaram",fri:"Sexta",sat:"Sábado",
+  /* contacto */
+  conEy:"Contacto",conH:"A dois minutos dos Aliados.",
+  cAddr:"Morada",cPhone:"Telefone",cEmail:"Email",cIg:"Instagram",cHours:"Horário",cHoursV:"Todos os dias, 12h00–15h00 e 18h30–22h30",cHow:"Como chegar",cHowV:"Metro Trindade 5 min · Metro Aliados 2 min · Parque da Trindade perto",copy:"Copiar",
+  groupsH:"Grupos e sala privada",groupsP:"De dez a trinta pessoas, com um menu fixo combinado à frente.",groupsA:"reservas.porto@ramenme.pt · assunto \"Grupo\"",
+  pressH:"Imprensa e parcerias",pressP:"Fotografia, entrevistas, colaborações com produtores e outras cozinhas.",pressA:"reservas.porto@ramenme.pt · assunto \"Imprensa\"",
+  lostH:"Achados",lostP:"Liga-nos. Guardamos tudo atrás do balcão durante um mês.",lostA:"+351 22 323 5090",
+  recEy:"Recrutamento",recH:"Sem experiência em ramen? Nós também não tínhamos.",recP:"Somos uma equipa pequena e formamos todos na cozinha. O que não se ensina é aparecer e importar-se. Diz-nos quem és e quando podes trabalhar.",
+  recNote:"Não estamos a contratar neste momento? Manda na mesma. Guardamos as candidaturas durante 12 meses e falamos contigo quando abrir uma vaga.",
+  recNext:"O que acontece a seguir",recNexts:["Só quem contrata no Ramen Me vê a tua candidatura.","O CV fica guardado de forma privada e nunca segue por email.","Ao fim de 12 meses apagamos tudo sozinhos."],
+  fEmail:"Email",fPhone:"Telefone (opcional)",fWhere:"Onde gostavas de trabalhar",roles:["Cozinha","Sala","Balcão e bar","Outra"],fAbout:"Conta-nos quem és e quando podes trabalhar",fCv:"CV (opcional) · PDF, DOC ou DOCX, até 5 MB",fCvBtn:"Escolher ficheiro",
+  consent:"Aceito que o Ramen Me guarde esta candidatura durante 12 meses para me contactar sobre vagas.",alerts:"Quero também receber um email quando abrirem novas vagas.",
+  apply:"Enviar candidatura",eConsent:"Precisamos do teu consentimento para guardar a candidatura.",eEmail:"Precisamos de um email válido.",
+  recOk:"Candidatura pronta. Nesta pré-visualização nada foi enviado.",
+  privH:"Privacidade e reclamações",privP:"Explicamos como tratamos os teus dados, os cookies e a newsletter na nossa Política de Privacidade. Para saber o que temos ou pedir que apaguemos, escreve para reservas.porto@ramenme.pt. O Livro de Reclamações está disponível online e em papel no restaurante, conforme exigido pela lei portuguesa.",privLink:"Política de Privacidade",
+  conCta:"O caldo está quente.",
+  /* privacy */
+  pvEy:"Legal",pvH:"Política de Privacidade",pvP:"Versão resumida para esta proposta. O texto legal final fica a cargo do restaurante.",
+  pv:[["Quem somos","Ramen Me, Rua da Picaria 20, 4050-477 Porto. Contacto: reservas.porto@ramenme.pt."],["O que guardamos","Os dados que nos envias nos formulários de reserva, newsletter e recrutamento: nome, contacto e o que escreves."],["Para quê","Responder ao teu pedido de reserva, enviar a newsletter mensal e avaliar candidaturas. Nada mais."],["Durante quanto tempo","Reservas: até à data da visita. Newsletter: até cancelares. Candidaturas: 12 meses."],["Cookies","Só os necessários para o site funcionar e, com o teu consentimento, medição de audiência anónima."],["Os teus direitos","Podes pedir acesso, correção ou eliminação dos teus dados a qualquer momento por email."]],
+  /* footer */
+  fVisit:"Visitar",fHouse:"Casa",fLegal:"Legal",fRec:"Recrutamento",fCookies:"Definições de cookies",fAllerg:"Tabela de alergénios",fBook:"Livro de Reclamações",fRights:"© 2026 Ramen Me! Porto, Portugal",fProto:"Proposta de redesign",
+  people:"pessoas",person:"pessoa"
+},
+en:{
+  nav:{inicio:"Home",menu:"Menu",reservas:"Book",beats:"W/ Beats",uber:"Uber Eats",sobre:"About",contacto:"Contact"},
+  book:"Book",bookTable:"Book a table",seeMenu:"See the menu",fullMenu:"Full menu",
+  open:"Open now",closesAt:"closes at",closed:"Closed",opensAt:"opens at",barOpen:"Bar open",tomorrow:"tomorrow",
+  ticker:["Broth first","Noodles pulled at the counter","Japanese chef","R&B till close","Rua da Picaria 20","Terrace","2 vegan ramens","DJs Friday & Saturday"],
+  heroL1:"Broth first.",heroL2:"Then the rest.",
+  heroLead:"A small ramen bar two steps from Aliados. Japanese chef, thirty seats, a terrace, low light and R&B playing till close.",
+  stickerHot:"It's spicy. We warned you.",
+  stats:[["9.4","TheFork rating"],["30","Seats, counter included"],["8","Ramens, two of them vegan"],["2024","The year we opened"]],
+  aboutEy:"About us",aboutH:"Serious ramen, in a room that doesn't take itself seriously.",
+  aboutP:["The broth simmers for hours before service and the noodles are pulled at the counter. That part we're strict about. The rest (the music, the terrace, the table next to you) we want to keep easy.","Our chef is Japanese and you can taste it in the bowl. But this is Porto, so there's chouriço in the tantanmen and padrón peppers on top. Nobody in Tokyo would recognise it. Here everyone orders it twice.","Five minutes from Trindade metro, two from Aliados. No need to book, but the counter fills up fast at weekends."],
+  stk1:"Noodles pulled at the counter",stk2:"Made in Porto",
+  railEy:"The menu",railH:"Eight bowls. Pick yours.",railP:"Chicken-and-pork or vegan broth, thin straight hoso-men. Tap a bowl to see everything in it.",
+  beatsEy:"W/ Beats · Live DJ",beatsNext:"Next night",beatsH:"Friday and Saturday there's a DJ behind the counter.",beatsAll:"See the line-up",
+  cd:["days","hrs","min","sec"],live:"Playing now",
+  roomEy:"The room",roomH:"Low light. Old-school R&B. No pretension.",
+  roomP:"Counter seats by the open kitchen if you want to watch the noodles being pulled. Tables if you'd rather talk. Some nights, a live DJ.",
+  quote:"The chef is Japanese and it shows. One of the most authentic ramens in the city.",quoteBy:"Guest review",
+  igEy:"@ramenme.pt",igH:"Everything we cook shows up here first.",igBtn:"Follow on Instagram",
+  newsEy:"Newsletter",newsH:"One email a month. No more.",newsP:"New bowls, DJ nights and the odd closing day.",newsPh:"your@email.com",newsBtn:"Subscribe",newsOk:"Sign-up recorded in this preview.",
+  newsPriv:"We only use your email to send the newsletter.",
+  ctaH:"Come hungry.",hoursLine:"Every day · 12:00–15:00 · 18:30–22:30",
+  menuEy:"The menu",menuH:"Every bowl, in full.",menuP:"Broth, protein, toppings and price for everything we serve. VAT included. Tap a dish for the details and add it to your ticket.",
+  cats:{all:"All",ramen:"Ramens",starters:"Starters",don:"Donburi",dessert:"Desserts",drinks:"Drinks"},
+  catJp:{ramen:"ラーメン",starters:"前菜",don:"丼",dessert:"デザート",drinks:"飲み物"},
+  catP:{ramen:"Flavoured oil +€1.20 · chili oil or garlic chili oil.",starters:"Handmade gyoza, fried bites and sauces.",don:"Japanese rice with protein and toppings on top.",dessert:"Two desserts, and only two.",drinks:"Cocktails, sake, port wine and the rest."},
+  fVeg:"Vegan",fHot:"Spicy",search:"Search the menu",empty:"Nothing by that name. Try \"miso\" or \"gyoza\".",
+  broth:"Broth",protein:"Protein",toppings:"Toppings",noodle:"Noodles",desc:"Description",
+  bPork:"Chicken and pork",bVeg:"Vegan",noodleTxt:"Hoso-men, thin straight noodle",
+  oil:"Garlic chili oil +€1.20",add:"Add to ticket",added:"Added to ticket",
+  tray:"Your ticket",trayTitle:"Ticket",trayNote:"The ticket helps you choose. You order at the table or on Uber Eats.",trayEmpty:"Still empty. Pick a bowl.",total:"Total",clear:"Clear",copyTicket:"Copy ticket",copied:"Copied",withOil:"+ chili oil",
+  allergH:"Allergens",allergP:"The full allergen table for every dish is available as a PDF and on paper at the restaurant. If you have an allergy or intolerance, tell us before you order. Because of possible cross-contamination, all dishes may contain traces of allergens.",allergBtn:"Allergen table (PDF)",
+  water:"To lower our footprint, we serve EAU filtered water.",sakeNote:"Our sake selection may vary, ask your server.",
+  menuCta:"Pick your bowl. We'll save you a seat.",orderUber:"Order on Uber Eats",
+  resEy:"Bookings",resH:"Thirty seats. Tell us when.",resP:"You can walk in, but the counter fills up fast from Thursday on. Send us a request and we'll reply the same day.",
+  fName:"Name",fContact:"Email or phone",fDate:"Date",fPeople:"Guests",fTime:"Time",fNote:"Anything we should know",fNotePh:"Terrace, high chair, birthday…",lunch:"Lunch",dinner:"Dinner",
+  send:"Send request",sameDay:"We reply the same day",
+  eName:"Tell us your name.",eContact:"We need an email or phone number.",eTime:"Pick a time.",
+  resOkH:"Request ready",resOkP:"On the live site this request goes straight to the team. In this preview nothing was sent: copy the request or give us a call.",newReq:"New request",
+  callP:"Rather talk? Call +351 22 323 5090 during service hours. Groups of ten or more: write to us and we'll set a fixed menu.",
+  hoursH:"Hours",hrs:[["Lunch · every day","12:00–15:00"],["Dinner · every day","18:30–22:30"],["Bar · Fridays","until 01:00"]],lastOrders:"Last orders thirty minutes before closing.",
+  goodH:"Good to know",good:["Terrace open when the weather allows. Ask when booking.","Two vegan ramens and vegan gyoza on the menu.","We have high chairs.","Five minutes from Trindade metro, two from Aliados."],
+  uberEy:"Delivery and takeaway",uberH:"Ramen travels badly. We pack it so it doesn't.",uberP:"Broth, noodles and toppings go in separate containers. You build the bowl at home so the noodles arrive al dente. On Uber Eats during service hours.",
+  takeaway:"Takeaway: +351 22 323 5090",zoneL:"Delivery area",zone:"Baixa, Cedofeita, Boavista",pickL:"Counter pick-up",pick:"Ready in 15 to 20 min",
+  steps:[["Broth","Travels hot, on its own."],["Noodles","Separate, so they stay firm."],["Toppings","You stack it all at home."]],
+  doorH:"Rua da Picaria 20. The red door.",map:"Open in maps",
+  beatsH1:"Live music, Friday and Saturday.",beatsP:"A different DJ behind the counter, with hip-hop, R&B and groove till close. Book a table and come listen.",
+  upcoming:"Next nights",pastH:"Already played",fri:"Friday",sat:"Saturday",
+  conEy:"Contact",conH:"Two minutes from Aliados.",
+  cAddr:"Address",cPhone:"Phone",cEmail:"Email",cIg:"Instagram",cHours:"Hours",cHoursV:"Every day, 12:00–15:00 and 18:30–22:30",cHow:"Getting here",cHowV:"Trindade metro 5 min · Aliados metro 2 min · Trindade car park nearby",copy:"Copy",
+  groupsH:"Groups and private room",groupsP:"Ten to thirty people, with a fixed menu agreed in advance.",groupsA:"reservas.porto@ramenme.pt · subject \"Group\"",
+  pressH:"Press and partnerships",pressP:"Photography, interviews, collaborations with producers and other kitchens.",pressA:"reservas.porto@ramenme.pt · subject \"Press\"",
+  lostH:"Lost & found",lostP:"Call us. We keep everything behind the counter for a month.",lostA:"+351 22 323 5090",
+  recEy:"Jobs",recH:"No ramen experience? Neither did we.",recP:"We're a small team and we train everyone in the kitchen. What can't be taught is showing up and caring. Tell us who you are and when you can work.",
+  recNote:"Not hiring right now? Send it anyway. We keep applications for 12 months and get in touch when a spot opens.",
+  recNext:"What happens next",recNexts:["Only the people hiring at Ramen Me see your application.","Your CV is stored privately and never travels by email.","After 12 months we delete everything automatically."],
+  fEmail:"Email",fPhone:"Phone (optional)",fWhere:"Where would you like to work",roles:["Kitchen","Floor","Counter & bar","Other"],fAbout:"Tell us who you are and when you can work",fCv:"CV (optional) · PDF, DOC or DOCX, up to 5 MB",fCvBtn:"Choose file",
+  consent:"I agree that Ramen Me keeps this application for 12 months to contact me about openings.",alerts:"Also email me when new openings come up.",
+  apply:"Send application",eConsent:"We need your consent to keep the application.",eEmail:"We need a valid email.",
+  recOk:"Application ready. In this preview nothing was sent.",
+  privH:"Privacy and complaints",privP:"Our Privacy Policy explains how we handle your data, cookies and the newsletter. To see what we hold or ask us to delete it, write to reservas.porto@ramenme.pt. The Complaints Book is available online and on paper at the restaurant, as required by Portuguese law.",privLink:"Privacy Policy",
+  conCta:"The broth is hot.",
+  pvEy:"Legal",pvH:"Privacy Policy",pvP:"Short version for this proposal. The final legal text is up to the restaurant.",
+  pv:[["Who we are","Ramen Me, Rua da Picaria 20, 4050-477 Porto. Contact: reservas.porto@ramenme.pt."],["What we keep","The data you send through the booking, newsletter and jobs forms: name, contact details and what you write."],["Why","To answer your booking, send the monthly newsletter and review applications. Nothing else."],["For how long","Bookings: until your visit. Newsletter: until you unsubscribe. Applications: 12 months."],["Cookies","Only those needed for the site to work and, with your consent, anonymous audience measurement."],["Your rights","You can ask to access, correct or delete your data at any time by email."]],
+  fVisit:"Visit",fHouse:"House",fLegal:"Legal",fRec:"Jobs",fCookies:"Cookie settings",fAllerg:"Allergen table",fBook:"Complaints Book",fRights:"© 2026 Ramen Me! Porto, Portugal",fProto:"Redesign proposal",
+  people:"guests",person:"guest"
+}};
+
+/* ================= data ================= */
+const P = (pt,en)=>({pt,en});
+const RAMENS = [
+ {id:"tonkotsu",n:"Tonkotsu",jp:"豚骨らーめん",k:"豚骨",p:13,b:"pork",img:"tonkotsu",pr:P("Carne de porco assada, carne de porco estufada, 1/2 ovo","Roast pork, braised pork, 1/2 egg"),tp:P("Alho-francês, cebola roxa, cogumelo preto, cebolinho, menma, pasta de piripiri","Leek, red onion, black mushroom, chives, menma, piri-piri paste")},
+ {id:"tonkotsu-black",n:"Tonkotsu Black",jp:"豚骨ブラック",k:"黒",p:14,b:"pork",img:"tonkotsu-black",pr:P("Carne de porco assada, carne de porco estufada, 1/2 ovo","Roast pork, braised pork, 1/2 egg"),tp:P("Alho-francês, cebola roxa, cogumelo preto, cebolinho, menma, óleo de alho negro","Leek, red onion, black mushroom, chives, menma, black garlic oil")},
+ {id:"chashu",n:"Tonkotsu Chashu",jp:"豚骨チャーシュー麺",k:"叉焼",p:16,b:"pork",img:"apron",pr:P("Carne de porco assada ×2, carne de porco estufada ×2, ovo","Roast pork ×2, braised pork ×2, egg"),tp:P("Alho-francês, cebola roxa, cogumelo preto, cebolinho, menma, pasta de piripiri","Leek, red onion, black mushroom, chives, menma, piri-piri paste")},
+ {id:"chashu-black",n:"Tonkotsu Chashu Black",jp:"豚骨チャーシューブラック",k:"黒",p:17,b:"pork",img:"chashu-black",pr:P("Carne de porco assada ×2, carne de porco estufada ×2, ovo","Roast pork ×2, braised pork ×2, egg"),tp:P("Alho-francês, cebola roxa, cogumelo preto, cebolinho, menma, óleo de alho negro","Leek, red onion, black mushroom, chives, menma, black garlic oil")},
+ {id:"karaage-miso",n:"Karaage Miso Ramen",jp:"唐揚げ味噌らーめん",k:"味噌",p:16,b:"pork",img:"creamy",pr:P("Karaage de frango, ovo","Chicken karaage, egg"),tp:P("Alho-francês, cebola roxa, cogumelo preto, cebolinho, menma","Leek, red onion, black mushroom, chives, menma")},
+ {id:"vegan-miso",n:"Vegan Miso Ramen",jp:"ヴィーガン味噌らーめん",k:"味噌",p:14.5,b:"veg",tags:["veg"],img:"vegan-miso",pr:P("Tofu frito","Fried tofu"),tp:P("Cebola roxa, cogumelo preto, cebolinho, menma","Red onion, black mushroom, chives, menma")},
+ {id:"tantanmen",n:"Piri-Piri Tantanmen",jp:"ピリピリ坦々麺",k:"坦々",p:15.5,b:"pork",tags:["hot"],img:"tantanmen",pr:P("Carne de porco picada marinada, chouriço português, ovo","Marinated minced pork, Portuguese chouriço, egg"),tp:P("Pak choy, cebola roxa, pimento padrón, couve","Pak choy, red onion, padrón pepper, cabbage")},
+ {id:"tantan-vegan",n:"Piri-Piri Tantanmen Vegan",jp:"ヴィーガン坦々麺",k:"坦々",p:15,b:"veg",tags:["hot","veg"],img:"tantan-vegan",pr:P("Molho de soja picante marinado","Marinated spicy soy"),tp:P("Pak choy, alho-francês, cebola roxa, pimento padrón","Pak choy, leek, red onion, padrón pepper")}
+].map(r=>({...r,cat:"ramen"}));
+const DISHES = [
+ ...RAMENS,
+ {id:"gyoza",cat:"starters",n:"Gyoza de Porco",ne:"Pork Gyoza",jp:"餃子ポーク",k:"餃子",p:6.5,d:P("Gyoza artesanal de porco e couve com molho ponzu","Handmade pork and cabbage gyoza with ponzu")},
+ {id:"gyoza-vegan",cat:"starters",n:"Gyoza Vegan",jp:"餃子ヴィーガン",k:"餃子",p:6.5,tags:["veg"],d:P("Gyoza artesanal de couve-chinesa, cebola e panko com molho ponzu","Handmade napa cabbage, onion and panko gyoza with ponzu")},
+ {id:"karaage",cat:"starters",n:"Frango Karaage",ne:"Chicken Karaage",jp:"鶏の唐揚げ",k:"唐揚げ",p:6.5,img:"karaage",d:P("Frango tenro marinado em especiarias japonesas, saké, mirin, molho de soja e alho","Tender chicken marinated in Japanese spices, sake, mirin, soy sauce and garlic")},
+ {id:"ebi",cat:"starters",n:"Ebi Furai",jp:"海老フライ",k:"海老",p:6.5,d:P("Camarão panado e frito, de textura escura e crocante","Breaded fried prawns, dark and crunchy")},
+ {id:"karaage-don",cat:"don",n:"Karaage Don",jp:"唐揚げ丼",k:"丼",p:10.5,img:"karaage-don",d:P("Frango frito com ovo \"ontama\" cozido mole, couve, arroz japonês e cebolinho","Fried chicken with soft \"ontama\" egg, cabbage, Japanese rice and chives")},
+ {id:"tofu-don",cat:"don",n:"Tofu Teriyaki Don",jp:"豆腐てりやき丼",k:"豆腐",p:10.5,tags:["veg"],d:P("Tofu frito com molho teriyaki doce de soja","Fried tofu with sweet soy teriyaki sauce")},
+ {id:"cheesecake",cat:"dessert",n:"New York Cheesecake",jp:"チーズケーキ",k:"甘",p:6,d:P("O clássico, denso e cremoso.","The classic, dense and creamy.")},
+ {id:"tiramisu",cat:"dessert",n:"Matcha Tiramisu",jp:"抹茶ティラミス",k:"抹茶",p:7,d:P("Tiramisu com matcha japonês.","Tiramisu with Japanese matcha.")}
+];
+const DRINKS = [
+ {h:P("Cocktails","Cocktails"),items:[["Sake Amaretto Sour",P("Saké, amaretto, limão","Sake, amaretto, lemon"),9],["Singapore Sling",P("Gin, ginja, cointreau, benedictine, ananás, lima","Gin, ginja, cointreau, benedictine, pineapple, lime"),10],["Tokyo Ice Tea",P("Vodka, rum, tequila, gin, melão, limão","Vodka, rum, tequila, gin, melon, lemon"),10],["Kanchanganna Bar Tiki",P("Rum, lima, ananás","Rum, lime, pineapple"),11],["Love Merry",P("Gin, campari, limão, manjericão","Gin, campari, lemon, basil"),10],["Japanese Sleeper",P("Cointreau, midori, limão","Cointreau, midori, lemon"),10],["Tokyo Mule",P("Vodka, ginger beer, pepino, limão","Vodka, ginger beer, cucumber, lemon"),9],["Aperol Spritz",P("Aperol, prosecco","Aperol, prosecco"),8],["Caipirinha",P("Cachaça, lima, açúcar","Cachaça, lime, sugar"),8],["Mojito",P("Rum, lima, hortelã, açúcar","Rum, lime, mint, sugar"),8]]},
+ {h:P("Mocktails","Mocktails"),s:P("Sem álcool","Alcohol-free"),items:[["Sakura Mango",P("Pepino, manga, lima","Cucumber, mango, lime"),8],["Goiaba Zen",P("Goiaba, lima, hortelã","Guava, lime, mint"),8]]},
+ {h:P("Sem álcool","Soft drinks"),items:[["Soft drinks",P("Coca-Cola / Zero / Fanta Laranja","Coca-Cola / Zero / Fanta Orange"),2.5],[P("Água","Water"),P("750 ml","750 ml"),3.5],["Iced tea",P("Com lichia","With lychee"),3],[P("Limonada","Lemonade"),P("Com mel","With honey"),3],[P("Limonada Matcha","Matcha Lemonade"),P("Com menta e matcha","With mint and matcha"),3.5],["Kombucha",P("Original, ginger ou citrus","Original, ginger or citrus"),3.5],["Ramune",P("Soda japonesa de berlinde","Japanese marble soda"),6],["Sakuraen Ice Tea",P("Chá verde japonês","Japanese green tea"),3.5]]},
+ {h:P("Cervejas","Beer"),items:[["Asahi",P("250 ml","250 ml"),3.5],[P("Super Bock sem álcool","Super Bock alcohol-free"),P("330 ml","330 ml"),3.5]]},
+ {h:P("Quentes","Hot drinks"),items:[["Espresso",null,1.5],[P("Descafeinado","Decaf"),null,1.5],["Americano",null,2.5],["Matcha Latte",null,6],["Cappuccino",null,3.5],[P("Sakuraen chá verde","Sakuraen green tea"),null,3.5],[P("Sakuraen chá hoji","Sakuraen hoji tea"),null,3.5]],note:"water"},
+ {h:P("Saké & Soju","Sake & Soju"),items:[["Soju",null,4],["Sōtō Junmai Premium",P("Garrafa 300 ml","300 ml bottle"),70],["House Sake Shot",null,5],["Premium Sake Shot",null,7]],note:"sakeNote"},
+ {h:P("Vinhos","Wine"),sub:[[P("Tinto","Red"),[["Papa Figos",null,16],["Contador de Estórias",null,20],["Pomar do Espírito Reserva Collector",P("Premium","Premium"),45]]],[P("Branco","White"),[["Papa Figos",null,16],["Platónico",null,18],["BSE Branco Seco Especial",null,18],["Dona Fátima Reserva",P("Premium","Premium"),45]]],[P("Rosé & Verde","Rosé & Green"),[["Manz",P("Rosé","Rosé"),18],["Azevedo",P("Verde","Vinho Verde"),16.5],[P("Vinho a copo","Wine by the glass"),P("Tinto, branco, rosé, verde","Red, white, rosé, green"),4]]],[P("Espumante","Sparkling"),[["Cinzano Pro Spritz",null,20]]]]},
+ {h:P("Sangria","Sangria"),items:[[P("Copo · maracujá","Glass · passion fruit"),null,8],[P("Copo · lichia","Glass · lychee"),null,8],[P("Jarro · maracujá","Jug · passion fruit"),null,24],[P("Jarro · lichia","Jug · lychee"),null,24]]},
+ {h:P("Vinho do Porto","Port wine"),s:P("Cálice","By the glass"),items:[["White",null,6],["Lágrima White",null,6],["Tawny",null,6],["Ruby",null,6]]},
+ {h:P("Destilados","Spirits"),sub:[["Whisky",[["Jameson",null,7],["Jack Daniels",null,9.5],["Jim Beam",null,10],["Nikka Days",null,10.5],["Chivas Regal 12",null,14],["Nikka From the Barrel",null,15.5]]],["Gin",[["Bulldog",null,9],["Nordés",null,9.5],["Hendricks",null,10.5],["Roku",null,12],["Jinzu",null,12],["Ki No Bi",null,13]]],["Rum",[["Bacardi Carta Blanca",null,7],["Bacardi Spiced",null,8],["Diplomático Reserva Exclusiva",null,13]]],["Tequila · Cachaça · Vodka",[["Altos Reposado",null,10],["Altos Plata",null,10],["Anumará",null,7],["Zubrowka",null,8.5],["Grey Goose",null,10]]]]}
+];
+const NIGHTS = [
+ {d:"2026-10-02T20:00:00+01:00",n:"Minus Mr. Dolly"},
+ {d:"2026-10-03T20:00:00+01:00",n:"VSO"},
+ {d:"2026-10-09T20:00:00+01:00",n:"Tácio",bio:P("Nascido na zona ribeirinha do Porto, artista desde os 17 anos e cofundador dos Activasom. Colaborou com Minus & Mrdolly, Virtus e Enigmacru e deu origem ao coletivo Sexto Sentido, uma referência do hip-hop portuense. Em 2023 estreou-se a solo com o álbum «tanto faz» e passou também pelo DJing.","Born by Porto's riverside, an artist since 17 and co-founder of Activasom. He worked with Minus & Mrdolly, Virtus and Enigmacru and started the Sexto Sentido collective, a reference in Porto hip-hop. In 2023 he released his solo album «tanto faz» and moved into DJing.")},
+ {d:"2026-10-10T20:00:00+01:00",n:"Foque",bio:P("Produtor, DJ e sound designer. Foque traz um leque largo de música que oscila entre a eletrónica mais groovy, o hip-hop mais suado, os primeiros bangers e a bass music mais dançável.","Producer, DJ and sound designer. Foque brings a wide range that swings between groovy electronica, sweaty hip-hop, early bangers and danceable bass music.")},
+ {d:"2026-10-16T20:00:00+01:00",n:"Score",bio:P("DJ do Porto, apaixonado pelo hip-hop desde os anos 90. Começou na viragem do milénio e destacou-se na cena da cidade, a gravar e a atuar com alguns dos MCs mais icónicos do Porto. Técnico e eclético, lê o público como poucos, do hip-hop «tuga» ao trap e ao boom bap.","Porto DJ, hooked on hip-hop since the 90s. He started at the turn of the millennium and made his name in the city's scene, recording and playing live with some of Porto's most iconic MCs. Technical and eclectic, he reads a room like few others, from Portuguese hip-hop to trap and boom bap.")},
+ {d:"2026-10-17T20:00:00+01:00",n:"Suprhyme",bio:P("Francisco de Melo, do Porto: produz desde 2007 e atua desde 2012. Já partilhou palcos com Dealema, Sam the Kid e Mundo Segundo, em salas como o Hard Club e o Plano B. Desde 2020 integra a produção da editora 2º Piso, com sets marcados pela diversidade de estilos.","Francisco de Melo, from Porto: producing since 2007 and playing live since 2012. He has shared stages with Dealema, Sam the Kid and Mundo Segundo at venues like Hard Club and Plano B. Since 2020 he's part of the 2º Piso label's production team, with sets known for their range of styles.")},
+ {d:"2026-10-23T20:00:00+01:00",n:"Bent"},
+ {d:"2026-10-24T20:00:00+01:00",n:"Welk"},
+ {d:"2026-10-30T20:00:00+00:00",n:"Troublebaker"},
+ {d:"2026-10-31T20:00:00+00:00",n:"IDareYouAgain"}
+].map(x=>({...x,t:new Date(x.d)}));
+const SET_MS = 150*60*1000; // 20h–22h30
+
+/* ================= state ================= */
+let lang = "pt";
+try{ const s=localStorage.getItem("rm-lang"); if(s==="en"||s==="pt") lang=s; else if((navigator.language||"").slice(0,2)!=="pt") lang="en"; }catch(e){}
+const st = {route:"inicio", cat:"all", veg:false, hot:false, q:"", tray:[], res:null, rec:null, news:false, role:null};
+try{ const tr=JSON.parse(localStorage.getItem("rm-tray")||"[]"); if(Array.isArray(tr)) st.tray=tr; }catch(e){}
+const L = ()=>T[lang];
+const tx = v => v==null ? "" : (typeof v==="string" ? v : v[lang]);
+const eur = n => "€"+(lang==="pt" ? n.toFixed(2).replace(".",",") : n.toFixed(2));
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dname = d => lang==="en" && d.ne ? d.ne : d.n;
+const IMG = n => `img/${n}.jpg`;
+
+/* ================= routing ================= */
+const ROUTES = {inicio:["inicio"],menu:["menu"],alergenios:["menu","sec-allerg"],bebidas:["menu",null,"drinks"],reservas:["reservas"],uber:["reservas","sec-uber"],beats:["beats"],contacto:["contacto"],recrutamento:["contacto","sec-rec"],sobre:["inicio","sec-sobre"],privacidade:["privacidade"]};
+function parse(){ const h=(location.hash||"").replace("#",""); return ROUTES[h]||ROUTES.inicio; }
+function go(){
+  const [page,anchor,cat]=parse(); const changed = page!==st.route; st.route=page;
+  if(cat) st.cat=cat;
+  render();
+  closeMnav();
+  requestAnimationFrame(()=>{
+    if(anchor){ const el=document.getElementById(anchor); if(el){ const y=el.getBoundingClientRect().top+scrollY-80; scrollTo({top:y,behavior:"smooth"}); return; } }
+    if(changed||!anchor) scrollTo({top:0});
+  });
+}
+addEventListener("hashchange",go);
+
+/* ================= status ================= */
+function lisbonNow(){
+  const parts = new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Lisbon",weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());
+  const g=k=>parts.find(p=>p.type===k).value;
+  return {wd:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(g("weekday")), m:(+g("hour")%24)*60+ +g("minute")};
+}
+const hm = m => { const h=Math.floor(m/60)%24, mm=m%60; return lang==="pt" ? `${h}h${String(mm).padStart(2,"0")}` : `${String(h).padStart(2,"0")}:${String(mm).padStart(2,"0")}`; };
+function status(){
+  const {wd,m}=lisbonNow(), t=L();
+  if(m>=720&&m<900) return {open:true,txt:`${t.open} · ${t.closesAt} ${hm(900)}`};
+  if(m>=1110&&m<1350) return {open:true,txt:`${t.open} · ${t.closesAt} ${hm(wd===5?1500:1350)}`};
+  if((wd===5&&m>=1350)||(wd===6&&m<60)) return {open:true,txt:`${t.barOpen} · ${t.closesAt} ${hm(60)}`};
+  if(m<720) return {open:false,txt:`${t.closed} · ${t.opensAt} ${hm(720)}`};
+  if(m<1110) return {open:false,txt:`${t.closed} · ${t.opensAt} ${hm(1110)}`};
+  return {open:false,txt:`${t.closed} · ${t.opensAt} ${hm(720)} ${t.tomorrow}`};
+}
+function paintStatus(){ const s=status(); document.querySelectorAll("[data-status]").forEach(el=>{el.classList.toggle("open",s.open); el.querySelector("b").textContent=s.txt;}); }
+
+/* ================= shared bits ================= */
+const ticker = (dark)=>{ const items=L().ticker.map(x=>`<span>${esc(x)}</span>`).join(""); return `<div class="ticker${dark?" dark":""}" aria-hidden="true"><div class="ticker-track">${items}${items}</div></div>`; };
+function dishCard(d){
+  const tags=(d.tags||[]).map(g=>`<span class="tag ${g}">${g==="veg"?L().fVeg:L().fHot}</span>`).join("");
+  const sub = d.cat==="ramen" ? tx(d.tp) : tx(d.d);
+  return `<button class="dish" type="button" data-open="${d.id}" aria-label="${esc(dname(d))}, ${eur(d.p)}">
+    <div class="dish-img">${d.img?`<img src="${IMG(d.img)}" alt="" loading="lazy">`:`<div class="kanji" aria-hidden="true">${d.k}</div>`}
+      <span class="price-tag">${eur(d.p)}</span><span class="vjp" aria-hidden="true">${d.jp}</span></div>
+    <div class="dish-body"><h3>${esc(dname(d))}</h3>${tags?`<div class="tags">${tags}</div>`:""}<p>${esc(sub)}</p></div>
+    <span class="dish-add" aria-hidden="true">+</span></button>`;
+}
+function nextNight(){
+  const now=Date.now();
+  return NIGHTS.find(n=>n.t.getTime()+SET_MS>now) || null;
+}
+const fmtDay = d => new Intl.DateTimeFormat(lang==="pt"?"pt-PT":"en-GB",{timeZone:"Europe/Lisbon",weekday:"long"}).format(d);
+const fmtDate = d => { const p=new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Lisbon",day:"2-digit",month:"short"}).formatToParts(d); const day=p.find(x=>x.type==="day").value; const mo=new Intl.DateTimeFormat(lang==="pt"?"pt-PT":"en-GB",{timeZone:"Europe/Lisbon",month:"short"}).format(d).replace(".","").toUpperCase(); return `${day}.${mo}`; };
+function gigCard(){
+  const n=nextNight(), t=L(); if(!n) return "";
+  return `<div class="gig">
+    <div><div class="eyebrow">${t.beatsNext}</div>
+      <div class="when" style="margin-top:12px">${fmtDay(n.t)} · ${fmtDate(n.t)} · ${lang==="pt"?"20h–22h30":"20:00–22:30"}</div>
+      <div class="disp who wave-lg neon">${esc(n.n)}</div></div>
+    <div style="display:grid;gap:16px;justify-items:start">
+      <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="count" data-count="${n.t.getTime()}" aria-live="off"></div>
+      <a class="btn btn-neon" href="#reservas">${t.bookTable}</a>
+    </div></div>`;
+}
+function paintCount(){
+  document.querySelectorAll("[data-count]").forEach(el=>{
+    const target=+el.dataset.count, diff=target-Date.now(), t=L();
+    if(diff<=0){ el.innerHTML=`<div style="min-width:auto;padding:10px 14px"><b style="font-size:1rem;color:var(--neon)">● ${t.live}</b></div>`; return; }
+    const s=Math.floor(diff/1000), v=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];
+    el.innerHTML=v.map((x,i)=>`<div><b>${String(x).padStart(2,"0")}</b><small>${t.cd[i]}</small></div>`).join("");
+  });
+}
+const pageHead = (ey,h,p,jp)=>`<section class="phead"><div class="bgjp" aria-hidden="true">${jp}</div><div class="wrap"><span class="eyebrow">${ey}</span><h1 class="disp wave-lg">${h}</h1>${p?`<p>${p}</p>`:""}</div></section>`;
+function ctaBand(h,extra){
+  const t=L();
+  return `<section class="cta"><div class="wrap"><div><h2 class="disp wave-lg">${h}</h2></div><div><div class="hours">${extra||""}<span>${t.hoursLine}</span><span>Rua da Picaria 20 · 4050-477 Porto</span><span>+351 22 323 5090</span></div><div class="hero-ctas"><a class="btn btn-dark" href="#reservas">${t.bookTable}</a><a class="btn" href="#menu">${t.seeMenu}</a></div></div></div></section>`;
+}
+
+/* ================= pages ================= */
+function pHome(){
+  const t=L();
+  return `
+  <section class="hero">
+    <div class="hero-bg"><img src="${IMG("soba-neon")}" alt="${lang==="pt"?"Clientes a partilhar ramen sob o néon SOBA":"Guests sharing ramen under the SOBA neon"}"></div>
+    <div class="wrap">
+      <div class="hero-meta"><span class="status" data-status><i></i><b></b></span><span class="sticker red">ラーメン ミイ</span></div>
+      <h1 class="disp wave-lg">${t.heroL1}<span class="l2 neonline">${t.heroL2}</span></h1>
+      <p class="lead">${t.heroLead}</p>
+      <div class="hero-ctas"><a class="btn btn-neon" href="#reservas">${t.bookTable}</a><a class="btn" href="#menu">${t.seeMenu}</a></div>
+    </div>
+  </section>
+  ${ticker()}
+  <div class="wrap" style="padding-inline:0"><div class="stats">${t.stats.map(s=>`<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("")}</div></div>
+
+  <section class="band" id="sec-sobre"><div class="wrap split">
+    <div class="collage" aria-hidden="true">
+      <figure class="c1"><img src="${IMG("tonkotsu-black")}" alt="" loading="lazy"></figure>
+      <figure class="c2"><img src="${IMG("punk")}" alt="" loading="lazy"></figure>
+      <figure class="c3"><img src="${IMG("apron")}" alt="" loading="lazy"></figure>
+      <span class="sticker s1">${t.stk1}</span><span class="sticker red s2">${t.stk2}</span>
+    </div>
+    <div class="prose" style="display:grid;gap:18px">
+      <span class="eyebrow">${t.aboutEy}</span>
+      <h2 class="disp wave" style="font-size:clamp(2.4rem,5.6vw,4.4rem)">${t.aboutH}</h2>
+      <div>${t.aboutP.map(p=>`<p>${p}</p>`).join("")}</div>
+    </div>
+  </div></section>
+
+  <section class="band" style="padding-top:0"><div class="wrap">
+    <div class="sec-head" style="grid-template-columns:1fr auto;align-items:end"><div style="display:grid;gap:14px;min-width:0"><span class="eyebrow">${t.railEy}</span><h2 class="disp wave">${t.railH}</h2><p>${t.railP}</p></div><a class="btn" href="#menu">${t.fullMenu} →</a></div>
+    <div class="rail">${RAMENS.map(dishCard).join("")}</div>
+  </div></section>
+
+  <section class="band" style="padding-top:0"><div class="wrap" style="display:grid;gap:28px">
+    <div class="sec-head" style="margin:0"><span class="eyebrow">${t.beatsEy}</span><h2 class="disp wave">${t.beatsH}</h2></div>
+    ${gigCard()}
+    <a href="#beats" class="btn" style="justify-self:start">${t.beatsAll} →</a>
+  </div></section>
+
+  ${ticker(true)}
+  <section class="band room"><div class="wrap" style="display:grid;gap:40px">
+    <div class="split" style="align-items:end"><div style="display:grid;gap:16px"><span class="eyebrow">${t.roomEy}</span><h2 class="disp wave" style="font-size:clamp(2.6rem,6.4vw,5.2rem)">${t.roomH}</h2><p class="mute" style="max-width:48ch;margin:0">${t.roomP}</p></div>
+      <blockquote class="quote">“${t.quote}”<cite>— ${t.quoteBy} · TheFork 9.4</cite></blockquote></div>
+    <div class="room-grid">
+      <figure class="r1"><img src="${IMG("take-soba")}" alt="${lang==="pt"?"Três amigos a comer ramen sob o néon":"Three friends eating ramen under the neon"}" loading="lazy"></figure>
+      <figure class="r2"><img src="${IMG("slurp")}" alt="${lang==="pt"?"Cliente a puxar noodles com pauzinhos":"Guest lifting noodles with chopsticks"}" loading="lazy"></figure>
+      <figure class="r3"><img src="${IMG("sign")}" alt="${lang==="pt"?"Placa luminosa do Ramen Me na rua":"Ramen Me lightbox sign on the street"}" loading="lazy"></figure>
+    </div>
+  </div></section>
+
+  <section class="band" style="padding-top:0"><div class="wrap" style="display:grid;gap:28px">
+    <div class="sec-head" style="grid-template-columns:1fr auto;align-items:end;margin:0"><div style="display:grid;gap:14px;min-width:0"><span class="eyebrow">${t.igEy}</span><h2 class="disp wave">${t.igH}</h2></div><a class="btn btn-neon" href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">${t.igBtn} ↗</a></div>
+    <div class="ig">${["skate","shine","green-special","wink","crew-feed","tsukemen","beret","duck"].map(n=>`<a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener" aria-label="Instagram"><img src="${IMG(n)}" alt="" loading="lazy"></a>`).join("")}</div>
+    ${newsBox()}
+  </div></section>
+  ${ctaBand(t.ctaH)}`;
+}
+function newsBox(){
+  const t=L();
+  return `<div class="news"><div style="display:grid;gap:10px"><span class="eyebrow">${t.newsEy}</span><h3 class="disp wave">${t.newsH}</h3><p class="mute" style="margin:0">${t.newsP}</p></div>
+  <form id="newsForm" novalidate><label class="sr" for="newsEmail">Email</label><div class="inline-form"><input id="newsEmail" type="email" placeholder="${t.newsPh}" autocomplete="email" required><button class="btn btn-neon" type="submit">${t.newsBtn}</button></div>
+  <div class="err" id="newsErr"></div>${st.news?`<div class="ok-msg">✓ ${t.newsOk}</div>`:""}<p class="note">${t.newsPriv} <a href="#privacidade">${t.privLink}</a>.</p></form></div>`;
+}
+
+function pMenu(){
+  const t=L();
+  const cats=["all","ramen","starters","don","dessert","drinks"];
+  const count=c=>c==="all"?DISHES.length:c==="drinks"?DRINKS.reduce((a,g)=>a+(g.items?g.items.length:g.sub.reduce((b,s)=>b+s[1].length,0)),0):DISHES.filter(d=>d.cat===c).length;
+  return `${pageHead(t.menuEy,t.menuH,t.menuP,"ラーメン")}
+  <div class="mbar"><div class="wrap">
+    <div class="tabs" role="group" aria-label="${t.menuEy}">${cats.map(c=>`<button type="button" class="chip" data-cat="${c}" aria-pressed="${st.cat===c}">${t.cats[c]} <span class="n">${count(c)}</span></button>`).join("")}</div>
+    <div class="mfilters">
+      <button type="button" class="chip vegc" data-f="veg" aria-pressed="${st.veg}">● ${t.fVeg}</button>
+      <button type="button" class="chip hotc" data-f="hot" aria-pressed="${st.hot}">🌶 ${t.fHot}</button>
+    </div>
+    <label class="search"><span class="sr">${t.search}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg><input id="msearch" type="search" placeholder="${t.search}" value="${esc(st.q)}" autocomplete="off"></label>
+  </div></div>
+  <div class="wrap" id="mres">${menuResults()}</div>
+  <section class="band" id="sec-allerg" style="padding-block:40px 80px"><div class="wrap">
+    <div class="allerg"><div class="ico" aria-hidden="true">!</div><div style="display:grid;gap:10px"><h2 class="disp" style="font-size:2rem">${t.allergH}</h2><p style="margin:0" class="mute">${t.allergP}</p><a class="btn btn-sm" style="justify-self:start" href="https://ramenme.pt/wp-content/themes/ramen-me-2026/assets/docs/alergenios-ramenme.pdf" target="_blank" rel="noopener">${t.allergBtn} ↗</a></div></div>
+  </div></section>
+  <section class="cta"><div class="wrap"><h2 class="disp wave-lg" style="font-size:clamp(2.8rem,7vw,6rem)">${t.menuCta}</h2><div class="hero-ctas"><a class="btn btn-dark" href="#reservas">${t.bookTable}</a><a class="btn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener">${t.orderUber} ↗</a></div></div></section>`;
+}
+function matchQ(...s){ if(!st.q) return true; const q=st.q.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); return s.join(" ").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").includes(q); }
+function menuResults(){
+  const t=L(); let out="";
+  if(st.cat!=="drinks"){
+    for(const c of ["ramen","starters","don","dessert"]){
+      if(st.cat!=="all"&&st.cat!==c) continue;
+      const list=DISHES.filter(d=>d.cat===c && (!st.veg||(d.tags||[]).includes("veg")) && (!st.hot||(d.tags||[]).includes("hot")) && matchQ(d.n,d.ne||"",d.jp,tx(d.pr),tx(d.tp),tx(d.d)));
+      if(!list.length) continue;
+      out+=`<section class="msec"><div class="msec-h"><h2 class="disp">${t.cats[c]}</h2><span class="jp">${t.catJp[c]}</span><p>${t.catP[c]}</p></div><div class="grid">${list.map(dishCard).join("")}</div></section>`;
+    }
+  }
+  if((st.cat==="all"||st.cat==="drinks") && !st.veg && !st.hot){
+    const row=i=>{ const nm=tx(i[0]), ds=tx(i[1]); return matchQ(nm,ds)?`<div class="drow"><div class="dn"><b>${esc(nm)}</b>${ds?`<small>${esc(ds)}</small>`:""}</div><span class="lead"></span><span class="dp">${eur(i[2])}</span></div>`:""; };
+    const groups=DRINKS.map(g=>{
+      let body = g.items ? g.items.map(row).join("") : g.sub.map(s=>{ const r=s[1].map(row).join(""); return r?`<h4>${esc(tx(s[0]))}</h4>${r}`:""; }).join("");
+      if(!body) return "";
+      return `<div class="dgroup"><h3>${tx(g.h)}</h3>${g.s?`<div class="sub">${tx(g.s)}</div>`:""}${body}${g.note?`<p class="note">${t[g.note]}</p>`:""}</div>`;
+    }).join("");
+    if(groups) out+=`<section class="msec" id="sec-drinks"><div class="msec-h"><h2 class="disp">${t.cats.drinks}</h2><span class="jp">${t.catJp.drinks}</span><p>${t.catP.drinks}</p></div><div class="drinks">${groups}</div></section>`;
+  }
+  return out || `<div class="empty">${t.empty}</div>`;
+}
+
+function slotsFor(dateStr){
+  const out={lunch:[],dinner:[]};
+  for(let m=720;m<=870;m+=30) out.lunch.push(m);
+  for(let m=1110;m<=1320;m+=30) out.dinner.push(m);
+  const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Lisbon"}).format(new Date());
+  if(dateStr===today){ const {m}=lisbonNow(); out.lunch=out.lunch.filter(x=>x>m+30); out.dinner=out.dinner.filter(x=>x>m+30); }
+  return out;
+}
+function pRes(){
+  const t=L(); const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Lisbon"}).format(new Date());
+  const f=st.resForm||(st.resForm={name:"",contact:"",date:today,people:2,time:null,note:""});
+  if(f.date<today) f.date=today;
+  const sl=slotsFor(f.date);
+  const slotBtns=(arr)=>arr.map(m=>`<button type="button" class="chip" data-slot="${m}" aria-pressed="${f.time===m}">${hm(m)}</button>`).join("");
+  const form = st.res ? resReceipt() : `<form id="resForm" novalidate class="form-grid">
+      <div class="field"><label for="rName">${t.fName}</label><input id="rName" autocomplete="name" value="${esc(f.name)}"></div>
+      <div class="field"><label for="rContact">${t.fContact}</label><input id="rContact" autocomplete="email" value="${esc(f.contact)}"></div>
+      <div class="field"><label for="rDate">${t.fDate}</label><input id="rDate" type="date" min="${today}" value="${f.date}"></div>
+      <div class="field"><span class="flabel" id="pplLbl">${t.fPeople}</span><div class="stepper" role="group" aria-labelledby="pplLbl"><button type="button" data-ppl="-1" aria-label="−">−</button><output id="rPeople">${f.people}</output><button type="button" data-ppl="1" aria-label="+">+</button></div></div>
+      <div class="field full"><span class="flabel">${t.fTime}</span><div class="slots" id="slots">${sl.lunch.length?`<span class="lab">${t.lunch}</span>${slotBtns(sl.lunch)}`:""}${sl.dinner.length?`<span class="lab">${t.dinner}</span>${slotBtns(sl.dinner)}`:""}</div></div>
+      <div class="field full"><label for="rNote">${t.fNote}</label><textarea id="rNote" placeholder="${t.fNotePh}">${esc(f.note)}</textarea></div>
+      <div class="full err" id="resErr" role="alert"></div>
+      <div class="full" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><button class="btn btn-neon" type="submit">${t.send} →</button><span class="mono mute" style="font-size:.78rem">${t.sameDay}</span></div>
+      <p class="full note" style="margin:0">${t.callP}</p>
+    </form>`;
+  return `${pageHead(t.resEy,t.resH,t.resP,"予約")}
+  <section class="band" style="padding-top:56px"><div class="wrap res">
+    <div>${form}</div>
+    <aside style="display:grid;gap:16px">
+      <div class="side-card"><h3>${t.hoursH}</h3><span class="status" data-status style="justify-self:start"><i></i><b></b></span><div class="hrs">${t.hrs.map(h=>`<div><span>${h[0]}</span><span>${h[1]}</span></div>`).join("")}</div><p class="note" style="margin:0">${t.lastOrders}</p></div>
+      <div class="side-card"><h3>${t.goodH}</h3><ul>${t.good.map(g=>`<li>${g}</li>`).join("")}</ul></div>
+    </aside>
+  </div></section>
+  ${ticker()}
+  <section class="band" id="sec-uber"><div class="wrap uber">
+    <div style="display:grid;gap:16px"><span class="eyebrow">${t.uberEy}</span><h2 class="disp wave" style="font-size:clamp(2.4rem,5.6vw,4.4rem)">${t.uberH}</h2><p class="mute" style="margin:0;max-width:52ch">${t.uberP}</p>
+      <div class="hero-ctas"><a class="btn btn-neon" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener">${t.orderUber} ↗</a><span class="btn" style="cursor:text;user-select:all">${t.takeaway}</span></div>
+      <div class="facts"><div><small>${t.zoneL}</small>${t.zone}</div><div><small>${t.pickL}</small>${t.pick}</div></div></div>
+    <div class="bento-steps">${t.steps.map((s,i)=>`<div class="bstep"><b>${i+1}</b><div><strong style="font-family:var(--f-display);font-size:1.6rem;text-transform:uppercase;font-weight:900">${s[0]}</strong><div class="mute">${s[1]}</div></div></div>`).join("")}
+      <img src="${IMG("karaage-don")}" alt="${lang==="pt"?"Karaage Don numa taça preta":"Karaage Don in a black bowl"}" style="aspect-ratio:16/10;object-fit:cover;width:100%" loading="lazy"></div>
+  </div></section>
+  <section class="cta"><div class="wrap"><h2 class="disp wave-lg" style="font-size:clamp(2.8rem,7vw,6rem)">${t.doorH}</h2><div class="hero-ctas"><a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Ramen+Me+Rua+da+Picaria+20+Porto" target="_blank" rel="noopener">${t.map} ↗</a><a class="btn" href="#menu">${t.seeMenu}</a></div></div></section>`;
+}
+function resText(){
+  const r=st.res, t=L();
+  return `Ramen Me — ${t.resEy}\n${t.fName}: ${r.name}\n${t.fContact}: ${r.contact}\n${t.fDate}: ${r.date} · ${hm(r.time)}\n${t.fPeople}: ${r.people}${r.note?`\n${t.fNote}: ${r.note}`:""}`;
+}
+function resReceipt(){
+  const r=st.res,t=L();
+  const d=new Date(r.date+"T12:00:00Z"); const dd=new Intl.DateTimeFormat(lang==="pt"?"pt-PT":"en-GB",{weekday:"long",day:"numeric",month:"long",timeZone:"UTC"}).format(d);
+  return `<div class="receipt" style="margin:0;animation:rise .3s">
+    <div class="c" style="font-size:.7rem;letter-spacing:.14em">RAMEN ME · ラーメン ミイ</div>
+    <h3>${t.resOkH}</h3><div class="c" style="font-size:.72rem;margin-top:4px">Rua da Picaria 20 · Porto</div><hr>
+    <div class="rline"><span>${t.fName}</span><b>${esc(r.name)}</b></div>
+    <div class="rline"><span>${t.fContact}</span><b style="overflow-wrap:anywhere">${esc(r.contact)}</b></div>
+    <div class="rline"><span>${t.fDate}</span><b>${dd}</b></div>
+    <div class="rline"><span>${t.fTime}</span><b>${hm(r.time)}</b></div>
+    <div class="rline"><span>${t.fPeople}</span><b>${r.people}</b></div>
+    ${r.note?`<div class="rline"><small style="opacity:1">${esc(r.note)}</small></div>`:""}
+    <hr><p style="margin:0;font-size:.78rem">${t.resOkP}</p>
+    <div class="barcode" aria-hidden="true"></div><div class="c" style="font-size:.8rem;user-select:all">+351 22 323 5090</div>
+    <button class="rbtn" type="button" data-copy="res">${t.copyTicket}</button>
+    <button class="rbtn" type="button" data-newres style="background:transparent;color:var(--paper-ink);border:1.5px solid var(--paper-ink)">${t.newReq}</button>
+  </div>`;
+}
+
+function pBeats(){
+  const t=L(), now=Date.now();
+  const up=NIGHTS.filter(n=>n.t.getTime()+SET_MS>now), past=NIGHTS.filter(n=>n.t.getTime()+SET_MS<=now).reverse();
+  const wd=n=>n.t.getUTCDay()===5||new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Lisbon",weekday:"short"}).format(n.t)==="Fri"?t.fri:t.sat;
+  const time=lang==="pt"?"20h–22h30":"20:00–22:30";
+  return `<section class="phead"><div class="bgjp" aria-hidden="true">音楽</div><div class="wrap split" style="align-items:center">
+    <div style="display:grid;gap:18px"><span class="eyebrow">W/ Beats · Ramen Me</span><h1 class="disp wave-lg neon" style="font-size:clamp(4rem,14vw,10rem)">W/ Beats</h1><p>${t.beatsH1} ${t.beatsP}</p><div class="hero-ctas"><a class="btn btn-neon" href="#reservas">${t.bookTable}</a></div></div>
+    <div class="vinyl" aria-hidden="true"><b>W/ BEATS</b></div>
+  </div></section>
+  ${ticker()}
+  <section class="band" style="padding-top:56px"><div class="wrap" style="display:grid;gap:40px">
+    ${gigCard()}
+    ${up.length?`<div><div class="msec-h"><h2 class="disp">${t.upcoming}</h2><span class="jp">次の夜</span></div><div class="lineup">${up.map((n,i)=>`<div class="lrow${i===0?" next":""}"><span class="d">${wd(n)}</span><span class="dt">${fmtDate(n.t)}</span><span class="nm wave">${esc(n.n)}</span><a class="btn btn-sm${i===0?" btn-neon":""}" href="#reservas">${t.book}</a><span class="t sr">${time}</span></div>`).join("")}</div></div>`:""}
+    ${past.length?`<div><div class="msec-h"><h2 class="disp">${t.pastH} <span class="mono mute" style="font-size:1rem">${past.length}</span></h2><span class="jp">過去</span></div><div class="past">${past.map(n=>`<details${n.bio?"":" data-nobio"}><summary><span class="d mono mute" style="font-size:.78rem;letter-spacing:.1em;text-transform:uppercase">${wd(n)}</span><span class="dt disp" style="font-size:2rem">${fmtDate(n.t)}</span><span class="nm">${esc(n.n)}</span><span class="pl" aria-hidden="true">+</span></summary>${n.bio?`<div class="bio"><div class="avatar" aria-hidden="true">${esc(n.n[0])}</div><div style="display:grid;gap:8px"><h3 class="disp" style="font-size:2.2rem">${esc(n.n)}</h3><p style="margin:0;color:#d9cdc2;max-width:62ch">${tx(n.bio)}</p><span class="mono mute" style="font-size:.78rem">${time}</span></div></div>`:`<div class="bio"><span></span><p class="mono mute" style="margin:0;font-size:.8rem">${time}</p></div>`}</details>`).join("")}</div></div>`:""}
+  </div></section>
+  ${ctaBand(lang==="pt"?"Reserva e vem ouvir.":"Book and come listen.")}`;
+}
+
+function pContact(){
+  const t=L(), r=st.recForm||(st.recForm={name:"",email:"",phone:"",role:null,about:"",consent:false,alerts:false,file:""});
+  const recForm = st.rec ? `<div class="side-card" style="border-color:var(--veg)"><h3 style="color:var(--veg)">✓</h3><p style="margin:0">${t.recOk}</p><button class="btn btn-sm" type="button" data-newrec style="justify-self:start">${t.newReq}</button></div>` : `<form id="recForm" novalidate class="form-grid">
+      <div class="field"><label for="cName">${t.fName}</label><input id="cName" autocomplete="name" value="${esc(r.name)}"></div>
+      <div class="field"><label for="cEmail">${t.fEmail}</label><input id="cEmail" type="email" autocomplete="email" value="${esc(r.email)}"></div>
+      <div class="field full"><label for="cPhone">${t.fPhone}</label><input id="cPhone" type="tel" autocomplete="tel" value="${esc(r.phone)}"></div>
+      <div class="field full"><span class="flabel">${t.fWhere}</span><div class="roles">${t.roles.map((x,i)=>`<button type="button" class="chip" data-role="${i}" aria-pressed="${r.role===i}">${x}</button>`).join("")}</div></div>
+      <div class="field full"><label for="cAbout">${t.fAbout}</label><textarea id="cAbout">${esc(r.about)}</textarea></div>
+      <div class="field full"><span class="flabel">${t.fCv}</span><label class="file" for="cCv"><span class="btn btn-sm" aria-hidden="true">${t.fCvBtn}</span><span id="cvName">${esc(r.file)||"—"}</span><input id="cCv" type="file" accept=".pdf,.doc,.docx"></label></div>
+      <label class="check full"><input type="checkbox" id="cConsent"${r.consent?" checked":""}> <span>${t.consent} <a href="#privacidade">${t.privLink}</a>.</span></label>
+      <label class="check full"><input type="checkbox" id="cAlerts"${r.alerts?" checked":""}> <span>${t.alerts}</span></label>
+      <div class="full err" id="recErr" role="alert"></div>
+      <div class="full"><button class="btn btn-neon" type="submit">${t.apply} →</button></div>
+    </form>`;
+  const info=[[t.cAddr,"Rua da Picaria 20<br>4050-477 Porto","Rua da Picaria 20, 4050-477 Porto"],[t.cPhone,"+351 22 323 5090","+351223235090"],[t.cEmail,"reservas.porto@ramenme.pt","reservas.porto@ramenme.pt"],[t.cIg,`<a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">@ramenme.pt ↗</a>`],[t.cHours,t.cHoursV],[t.cHow,t.cHowV]];
+  return `${pageHead(t.conEy,t.conH,"","連絡")}
+  <section class="band" style="padding-top:56px"><div class="wrap" style="display:grid;gap:32px">
+    <div class="cgrid">${info.map(i=>`<div><small>${i[0]}</small><b>${i[1]}</b>${i[2]?`<button class="copy" type="button" data-copytxt="${esc(i[2])}">${t.copy}</button>`:""}</div>`).join("")}</div>
+    <div class="hero-ctas"><a class="btn btn-neon" href="#reservas">${t.bookTable}</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Ramen+Me+Rua+da+Picaria+20+Porto" target="_blank" rel="noopener">${t.map} ↗</a></div>
+    <div class="cards3">${[[t.groupsH,t.groupsP,t.groupsA],[t.pressH,t.pressP,t.pressA],[t.lostH,t.lostP,t.lostA]].map(c=>`<div><h3>${c[0]}</h3><p>${c[1]}</p><span class="mono" style="font-size:.8rem;color:var(--neon);user-select:all;overflow-wrap:anywhere">${c[2]}</span></div>`).join("")}</div>
+  </div></section>
+  ${ticker(true)}
+  <section class="band" id="sec-rec"><div class="wrap rec">
+    <div style="display:grid;gap:18px;align-content:start">
+      <span class="eyebrow">${t.recEy}</span><h2 class="disp wave" style="font-size:clamp(2.6rem,6vw,4.6rem)">${t.recH}</h2><p class="mute" style="margin:0">${t.recP}</p>
+      <img src="${IMG("punk")}" alt="${lang==="pt"?"Cliente de cabelo espetado a comer ramen":"Spiky-haired guest eating ramen"}" style="aspect-ratio:4/3;object-fit:cover;width:100%" loading="lazy">
+      <div class="side-card"><h3 style="font-size:1.4rem">${t.recNext}</h3><ul>${t.recNexts.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    </div>
+    <div style="display:grid;gap:16px"><p class="note" style="margin:0;font-size:.92rem">${t.recNote}</p>${recForm}</div>
+  </div></section>
+  <section class="band" style="padding-top:0"><div class="wrap"><div class="allerg"><div class="ico" aria-hidden="true">§</div><div style="display:grid;gap:10px"><h2 class="disp" style="font-size:2rem">${t.privH}</h2><p class="mute" style="margin:0">${t.privP}</p><div class="hero-ctas"><a class="btn btn-sm" href="#privacidade">${t.privLink}</a><a class="btn btn-sm" href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">${t.fBook} ↗</a></div></div></div></div></section>
+  ${ctaBand(t.conCta)}`;
+}
+function pPriv(){
+  const t=L();
+  return `${pageHead(t.pvEy,t.pvH,t.pvP,"個人")}<section class="band" style="padding-top:24px"><div class="wrap legal">${t.pv.map(p=>`<h2>${p[0]}</h2><p>${p[1]}</p>`).join("")}<p style="margin-top:32px"><a class="btn btn-sm" href="#contacto">${t.nav.contacto}</a></p></div></section>`;
+}
+
+/* ================= chrome ================= */
+function renderChrome(){
+  const t=L(), cur=st.route;
+  const links=[["inicio","inicio"],["menu","menu"],["reservas","reservas"],["beats","beats"],["uber","reservas"],["sobre","inicio"],["contacto","contacto"]];
+  const curHash=(location.hash||"#inicio").slice(1);
+  const isCur=(h,p)=> h===curHash || (p===cur && ["inicio","menu","reservas","beats","contacto"].includes(h) && !["uber","sobre"].includes(curHash));
+  document.getElementById("nav").innerHTML=links.filter(l=>l[0]!=="inicio").map(([h,p])=>`<a href="#${h}"${isCur(h,p)?' aria-current="page"':""}>${t.nav[h]}</a>`).join("");
+  const jp={inicio:"ホーム",menu:"メニュー",reservas:"予約",beats:"音楽",uber:"配達",sobre:"私たち",contacto:"連絡"};
+  document.getElementById("mlinks").innerHTML=links.map(([h,p])=>`<li><a href="#${h}"${isCur(h,p)?' aria-current="page"':""}><span class="wave">${t.nav[h]}</span><small>${jp[h]}</small></a></li>`).join("");
+  document.querySelectorAll("[data-t]").forEach(el=>el.textContent=t[el.dataset.t]);
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===lang));
+  document.documentElement.lang=lang==="pt"?"pt-PT":"en";
+  document.getElementById("mclose").setAttribute("aria-label",lang==="pt"?"Fechar":"Close");
+  document.getElementById("foot").innerHTML=`<div class="wrap">
+    <div class="foot-top">
+      <div><a class="foot-logo" href="#inicio" aria-label="Ramen Me">${LOGO_FULL}</a>
+        <div class="foot-addr"><span>Rua da Picaria 20<br>4050-477 Porto</span><span class="status" data-status style="justify-self:start"><i></i><b></b></span></div>
+        <div style="margin-top:22px">${MASCOT}</div></div>
+      <div><h4>${t.fVisit}</h4><ul><li><a href="#menu">${t.nav.menu}</a></li><li><a href="#reservas">${t.nav.reservas}</a></li><li><a href="#beats">W/ Beats</a></li><li><a href="#uber">Uber Eats</a></li><li><a href="#contacto">${t.nav.contacto}</a></li></ul></div>
+      <div><h4>${t.fHouse}</h4><ul><li><a href="#sobre">${t.nav.sobre}</a></li><li><a href="#recrutamento">${t.fRec}</a></li><li><a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">Instagram ↗</a></li></ul></div>
+      <div><h4>${t.fLegal}</h4><ul><li><a href="#privacidade">${t.privLink}</a></li><li><a href="#privacidade">${t.fCookies}</a></li><li><a href="#alergenios">${t.fAllerg}</a></li><li><a href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">${t.fBook} ↗</a></li></ul></div>
+    </div>
+    <div class="foot-bot"><span>${t.fRights}</span><span>${t.fProto} · PT / EN</span></div></div>`;
+}
+function render(){
+  const map={inicio:pHome,menu:pMenu,reservas:pRes,beats:pBeats,contacto:pContact,privacidade:pPriv};
+  document.getElementById("main").innerHTML=(map[st.route]||pHome)();
+  renderChrome(); paintStatus(); paintCount(); paintTray();
+}
+
+/* ================= menu interactions ================= */
+function refreshMenu(){ const m=document.getElementById("mres"); if(m) m.innerHTML=menuResults(); document.querySelectorAll("[data-cat]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.cat===st.cat)); document.querySelectorAll("[data-f]").forEach(b=>b.setAttribute("aria-pressed",st[b.dataset.f])); }
+let lastFocus=null;
+function openDish(id){
+  const d=DISHES.find(x=>x.id===id); if(!d) return; const t=L();
+  lastFocus=document.activeElement;
+  const spec = d.cat==="ramen"
+    ? [[t.broth,d.b==="veg"?t.bVeg:t.bPork],[t.protein,tx(d.pr)],[t.toppings,tx(d.tp)],[t.noodle,t.noodleTxt]]
+    : [[t.desc,tx(d.d)]];
+  const tags=(d.tags||[]).map(g=>`<span class="tag ${g}">${g==="veg"?t.fVeg:t.fHot}</span>`).join("");
+  document.getElementById("layer").innerHTML=`<div class="scrim" data-scrim><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+    <button class="sheet-close" type="button" data-close aria-label="${lang==="pt"?"Fechar":"Close"}">×</button>
+    <div class="sheet-img">${d.img?`<img src="${IMG(d.img)}" alt="${esc(dname(d))}">`:`<div class="kanji" aria-hidden="true">${d.k}</div>`}${(d.tags||[]).includes("hot")?`<span class="sticker red" style="position:absolute;left:14px;bottom:16px">${t.stickerHot}</span>`:""}</div>
+    <div class="sheet-body">
+      <span class="jp" style="color:var(--neon)">${d.jp}</span>
+      <h3 class="disp wave" id="dTitle">${esc(dname(d))}</h3>${tags?`<div class="tags">${tags}</div>`:""}
+      <dl class="spec">${spec.map(s=>`<div><dt>${s[0]}</dt><dd>${esc(s[1])}</dd></div>`).join("")}</dl>
+      ${d.cat==="ramen"?`<label class="check addon"><input type="checkbox" id="oil"> ${t.oil}</label>`:""}
+      <div class="sheet-foot"><span class="big" id="dPrice">${eur(d.p)}</span><button class="btn btn-neon" type="button" data-add="${d.id}">${t.add} +</button></div>
+    </div></div></div>`;
+  document.querySelector("[data-close]").focus();
+  const oil=document.getElementById("oil"); if(oil) oil.addEventListener("change",()=>document.getElementById("dPrice").textContent=eur(d.p+(oil.checked?1.2:0)));
+}
+function closeLayer(){ document.getElementById("layer").innerHTML=""; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+function saveTray(){ try{localStorage.setItem("rm-tray",JSON.stringify(st.tray));}catch(e){} }
+function addTray(id,oil){
+  const key=id+(oil?"+oil":""); const ex=st.tray.find(x=>x.key===key);
+  if(ex) ex.q++; else st.tray.push({key,id,oil:!!oil,q:1});
+  saveTray(); paintTray(true);
+}
+function trayTotal(){ return st.tray.reduce((a,x)=>{const d=DISHES.find(y=>y.id===x.id); return a+(d?(d.p+(x.oil?1.2:0))*x.q:0);},0); }
+function paintTray(bump){
+  const b=document.getElementById("trayBtn"), n=st.tray.reduce((a,x)=>a+x.q,0);
+  b.hidden = !(n>0 || st.route==="menu");
+  document.getElementById("trayCnt").textContent=n;
+  document.getElementById("trayLbl").textContent=`${L().tray} · ${eur(trayTotal())}`;
+  if(bump){ b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); }
+}
+function trayText(){ const t=L(); return `Ramen Me — ${t.trayTitle}\n`+st.tray.map(x=>{const d=DISHES.find(y=>y.id===x.id); return `${x.q}× ${dname(d)}${x.oil?" "+t.withOil:""} — ${eur((d.p+(x.oil?1.2:0))*x.q)}`;}).join("\n")+`\n${t.total}: ${eur(trayTotal())}`; }
+function openTray(){
+  const t=L(); lastFocus=document.activeElement;
+  const now=new Intl.DateTimeFormat(lang==="pt"?"pt-PT":"en-GB",{timeZone:"Europe/Lisbon",dateStyle:"short",timeStyle:"short"}).format(new Date());
+  const lines=st.tray.map(x=>{const d=DISHES.find(y=>y.id===x.id); return `<div class="rline"><span>${esc(dname(d))}${x.oil?` <small style="display:inline;opacity:.7">${t.withOil}</small>`:""}</span><b>${eur((d.p+(x.oil?1.2:0))*x.q)}</b><div class="q"><button type="button" data-q="${x.key}" data-d="-1" aria-label="−">−</button><span>${x.q}</span><button type="button" data-q="${x.key}" data-d="1" aria-label="+">+</button></div></div>`;}).join("");
+  document.getElementById("layer").innerHTML=`<div class="scrim" data-scrim><div class="receipt" role="dialog" aria-modal="true" aria-labelledby="rTitle">
+    <button class="x" type="button" data-close aria-label="${lang==="pt"?"Fechar":"Close"}">×</button>
+    <div class="c" style="font-size:.7rem;letter-spacing:.14em">RAMEN ME · 食券</div>
+    <h3 id="rTitle">${t.trayTitle}</h3><div class="c" style="font-size:.72rem;margin-top:4px">${now}</div><hr>
+    ${lines||`<p class="c" style="margin:18px 0">${t.trayEmpty}</p>`}
+    ${lines?`<hr><div class="rtotal"><span>${t.total}</span><span>${eur(trayTotal())}</span></div>`:""}
+    <hr><p style="margin:0;font-size:.76rem">${t.trayNote}</p>
+    <div class="barcode" aria-hidden="true"></div>
+    ${lines?`<button class="rbtn" type="button" data-copy="tray">${t.copyTicket}</button><a class="rbtn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener" style="background:var(--neon);color:#130404">${t.orderUber} ↗</a><button class="rbtn" type="button" data-clear style="background:transparent;color:var(--paper-ink);border:1.5px solid var(--paper-ink)">${t.clear}</button>`:`<a class="rbtn" href="#menu" data-close>${t.seeMenu}</a>`}
+  </div></div>`;
+  document.querySelector("[data-close]").focus();
+}
+
+/* ================= misc ================= */
+let toastT;
+function toast(msg){ const el=document.getElementById("toast"); el.textContent=msg; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,1800); }
+function copy(text,btn){
+  const done=()=>toast("✓ "+L().copied);
+  try{ navigator.clipboard.writeText(text).then(done).catch(()=>fallback()); }catch(e){ fallback(); }
+  function fallback(){ const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy"); done();}catch(e){} ta.remove(); }
+}
+const mnav=document.getElementById("mnav"), burger=document.getElementById("burger");
+function openMnav(){ mnav.hidden=false; burger.setAttribute("aria-expanded","true"); document.body.style.overflow="hidden"; document.getElementById("mclose").focus(); }
+function closeMnav(){ if(mnav.hidden) return; mnav.hidden=true; burger.setAttribute("aria-expanded","false"); document.body.style.overflow=""; }
+burger.addEventListener("click",openMnav);
+document.getElementById("mclose").addEventListener("click",()=>{closeMnav(); burger.focus();});
+document.getElementById("trayBtn").addEventListener("click",openTray);
+
+document.addEventListener("click",e=>{
+  const el=e.target.closest("button,a,[data-scrim]"); if(!el) return;
+  if(el.matches("[data-scrim]")){ if(e.target===el) closeLayer(); return; }
+  const ds=el.dataset;
+  if(ds.lang){ lang=ds.lang; try{localStorage.setItem("rm-lang",lang);}catch(_){}; const y=scrollY; render(); scrollTo({top:y}); return; }
+  if(ds.open){ openDish(ds.open); return; }
+  if(ds.close!==undefined){ closeLayer(); return; }
+  if(ds.add){ const oil=document.getElementById("oil"); addTray(ds.add,oil&&oil.checked); closeLayer(); toast("✓ "+L().added); return; }
+  if(ds.cat){ st.cat=ds.cat; refreshMenu(); return; }
+  if(ds.f){ st[ds.f]=!st[ds.f]; if(st[ds.f]&&st.cat==="drinks") st.cat="all"; refreshMenu(); return; }
+  if(ds.q){ const it=st.tray.find(x=>x.key===ds.q); if(it){ it.q+=+ds.d; if(it.q<=0) st.tray=st.tray.filter(x=>x!==it); saveTray(); paintTray(); openTray(); } return; }
+  if(ds.clear!==undefined){ st.tray=[]; saveTray(); paintTray(); closeLayer(); return; }
+  if(ds.copy){ copy(ds.copy==="tray"?trayText():resText()); return; }
+  if(ds.copytxt){ copy(ds.copytxt); return; }
+  if(ds.ppl){ const f=st.resForm; f.people=Math.min(30,Math.max(1,f.people+ +ds.ppl)); document.getElementById("rPeople").textContent=f.people; return; }
+  if(ds.slot){ st.resForm.time=+ds.slot; document.querySelectorAll("[data-slot]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.slot===st.resForm.time)); return; }
+  if(ds.newres!==undefined){ st.res=null; st.resForm=null; render(); return; }
+  if(ds.role){ st.recForm.role=+ds.role; document.querySelectorAll("[data-role]").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.role===st.recForm.role)); return; }
+  if(ds.newrec!==undefined){ st.rec=null; st.recForm=null; render(); return; }
+});
+document.addEventListener("input",e=>{
+  const id=e.target.id, v=e.target.value;
+  if(id==="msearch"){ st.q=v.trim(); if(st.q&&(st.veg||st.hot)){} refreshMenu(); return; }
+  const rf=st.resForm, cf=st.recForm;
+  if(id==="rName") rf.name=v; if(id==="rContact") rf.contact=v; if(id==="rNote") rf.note=v;
+  if(id==="cName") cf.name=v; if(id==="cEmail") cf.email=v; if(id==="cPhone") cf.phone=v; if(id==="cAbout") cf.about=v;
+});
+document.addEventListener("change",e=>{
+  const id=e.target.id;
+  if(id==="rDate"){ st.resForm.date=e.target.value; st.resForm.time=null; const y=scrollY; render(); scrollTo({top:y}); }
+  if(id==="cConsent") st.recForm.consent=e.target.checked;
+  if(id==="cAlerts") st.recForm.alerts=e.target.checked;
+  if(id==="cCv"){ const f=e.target.files[0]; st.recForm.file=f?f.name:""; document.getElementById("cvName").textContent=st.recForm.file||"—"; }
+});
+document.addEventListener("submit",e=>{
+  e.preventDefault(); const t=L();
+  if(e.target.id==="newsForm"){ const v=document.getElementById("newsEmail").value.trim(); if(!/^\S+@\S+\.\S+$/.test(v)){ document.getElementById("newsErr").textContent=t.eEmail; return; } st.news=true; const y=scrollY; render(); scrollTo({top:y}); }
+  if(e.target.id==="resForm"){ const f=st.resForm, err=document.getElementById("resErr");
+    if(!f.name.trim()) return err.textContent=t.eName; if(!f.contact.trim()) return err.textContent=t.eContact; if(f.time==null) return err.textContent=t.eTime;
+    st.res={...f}; const y=scrollY; render(); scrollTo({top:y}); }
+  if(e.target.id==="recForm"){ const f=st.recForm, err=document.getElementById("recErr");
+    if(!f.name.trim()) return err.textContent=t.eName; if(!/^\S+@\S+\.\S+$/.test(f.email)) return err.textContent=t.eEmail; if(!f.consent) return err.textContent=t.eConsent;
+    st.rec=true; const y=scrollY; render(); scrollTo({top:y}); }
+});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ if(document.getElementById("layer").innerHTML) closeLayer(); else closeMnav(); } });
+
+setInterval(()=>{ paintCount(); },1000);
+setInterval(paintStatus,30000);
+go();
+</script>
