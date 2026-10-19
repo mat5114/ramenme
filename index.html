@@ -37,7 +37,11 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;overflow-x:hidden}
+.ext{display:inline-block;width:.85em;height:.85em;vertical-align:-.05em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 9l6-6M4 3h5v5' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 9l6-6M4 3h5v5' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat}
+.chip.vegc::before,.chip.hotc::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.chip.hotc::before{background:var(--neon)}.chip.hotc[aria-pressed="true"]::before{background:#130404}
+.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--neon);margin-right:6px;vertical-align:.1em}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-variant-emoji:text;font-size:17px;line-height:1.55;overflow-x:hidden}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.07;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -101,9 +105,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 .ticker{overflow:hidden;border-block:1px solid var(--line);background:var(--neon);color:#130404;white-space:nowrap}
 .ticker-track{display:inline-flex;gap:0;animation:tick 38s linear infinite;padding-block:10px}
 .ticker span{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:1.35rem;letter-spacing:.02em;padding-right:28px;display:inline-flex;align-items:center;gap:28px}
-.ticker span::after{content:"✳";font-size:1rem}
+.ticker span::after{content:"";width:.7em;height:.7em;flex:none;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1v18M1 10h18M3.6 3.6l12.8 12.8M16.4 3.6L3.6 16.4' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1v18M1 10h18M3.6 3.6l12.8 12.8M16.4 3.6L3.6 16.4' stroke='%23000' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
 .ticker.dark{background:var(--bg-2);color:var(--ink)}
-.ticker.dark span::after{color:var(--neon)}
+.ticker.dark span::after{background:var(--neon)}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* ---------- hero ---------- */
@@ -798,7 +802,7 @@ function gigCard(){
 function paintCount(){
   document.querySelectorAll("[data-count]").forEach(el=>{
     const target=+el.dataset.count, diff=target-Date.now(), t=L();
-    if(diff<=0){ el.innerHTML=`<div style="min-width:auto;padding:10px 14px"><b style="font-size:1rem;color:var(--neon)">● ${t.live}</b></div>`; return; }
+    if(diff<=0){ el.innerHTML=`<div style="min-width:auto;padding:10px 14px"><b style="font-size:1rem;color:var(--neon)"><i class="live-dot" aria-hidden="true"></i>${t.live}</b></div>`; return; }
     const s=Math.floor(diff/1000), v=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];
     el.innerHTML=v.map((x,i)=>`<div><b>${String(x).padStart(2,"0")}</b><small>${t.cd[i]}</small></div>`).join("");
   });
@@ -862,7 +866,7 @@ function pHome(){
   </div></section>
 
   <section class="band" style="padding-top:0"><div class="wrap" style="display:grid;gap:28px">
-    <div class="sec-head" style="grid-template-columns:1fr auto;align-items:end;margin:0"><div style="display:grid;gap:14px;min-width:0"><span class="eyebrow">${t.igEy}</span><h2 class="disp wave">${t.igH}</h2></div><a class="btn btn-neon" href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">${t.igBtn} ↗</a></div>
+    <div class="sec-head" style="grid-template-columns:1fr auto;align-items:end;margin:0"><div style="display:grid;gap:14px;min-width:0"><span class="eyebrow">${t.igEy}</span><h2 class="disp wave">${t.igH}</h2></div><a class="btn btn-neon" href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">${t.igBtn}&nbsp;<i class="ext" aria-hidden="true"></i></a></div>
     <div class="ig">${["skate","shine","green-special","wink","crew-feed","tsukemen","beret","duck"].map(n=>`<a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener" aria-label="Instagram"><img src="${IMG(n)}" alt="" loading="lazy"></a>`).join("")}</div>
     ${newsBox()}
   </div></section>
@@ -883,16 +887,16 @@ function pMenu(){
   <div class="mbar"><div class="wrap">
     <div class="tabs" role="group" aria-label="${t.menuEy}">${cats.map(c=>`<button type="button" class="chip" data-cat="${c}" aria-pressed="${st.cat===c}">${t.cats[c]} <span class="n">${count(c)}</span></button>`).join("")}</div>
     <div class="mfilters">
-      <button type="button" class="chip vegc" data-f="veg" aria-pressed="${st.veg}">● ${t.fVeg}</button>
-      <button type="button" class="chip hotc" data-f="hot" aria-pressed="${st.hot}">🌶 ${t.fHot}</button>
+      <button type="button" class="chip vegc" data-f="veg" aria-pressed="${st.veg}">${t.fVeg}</button>
+      <button type="button" class="chip hotc" data-f="hot" aria-pressed="${st.hot}">${t.fHot}</button>
     </div>
     <label class="search"><span class="sr">${t.search}</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="7" r="5"/><path d="M11 11l4 4"/></svg><input id="msearch" type="search" placeholder="${t.search}" value="${esc(st.q)}" autocomplete="off"></label>
   </div></div>
   <div class="wrap" id="mres">${menuResults()}</div>
   <section class="band" id="sec-allerg" style="padding-block:40px 80px"><div class="wrap">
-    <div class="allerg"><div class="ico" aria-hidden="true">!</div><div style="display:grid;gap:10px"><h2 class="disp" style="font-size:2rem">${t.allergH}</h2><p style="margin:0" class="mute">${t.allergP}</p><a class="btn btn-sm" style="justify-self:start" href="https://ramenme.pt/wp-content/themes/ramen-me-2026/assets/docs/alergenios-ramenme.pdf" target="_blank" rel="noopener">${t.allergBtn} ↗</a></div></div>
+    <div class="allerg"><div class="ico" aria-hidden="true">!</div><div style="display:grid;gap:10px"><h2 class="disp" style="font-size:2rem">${t.allergH}</h2><p style="margin:0" class="mute">${t.allergP}</p><a class="btn btn-sm" style="justify-self:start" href="https://ramenme.pt/wp-content/themes/ramen-me-2026/assets/docs/alergenios-ramenme.pdf" target="_blank" rel="noopener">${t.allergBtn}&nbsp;<i class="ext" aria-hidden="true"></i></a></div></div>
   </div></section>
-  <section class="cta"><div class="wrap"><h2 class="disp wave-lg" style="font-size:clamp(2.8rem,7vw,6rem)">${t.menuCta}</h2><div class="hero-ctas"><a class="btn btn-dark" href="#reservas">${t.bookTable}</a><a class="btn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener">${t.orderUber} ↗</a></div></div></section>`;
+  <section class="cta"><div class="wrap"><h2 class="disp wave-lg" style="font-size:clamp(2.8rem,7vw,6rem)">${t.menuCta}</h2><div class="hero-ctas"><a class="btn btn-dark" href="#reservas">${t.bookTable}</a><a class="btn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener">${t.orderUber}&nbsp;<i class="ext" aria-hidden="true"></i></a></div></div></section>`;
 }
 function matchQ(...s){ if(!st.q) return true; const q=st.q.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,""); return s.join(" ").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").includes(q); }
 function menuResults(){
@@ -953,12 +957,12 @@ function pRes(){
   ${ticker()}
   <section class="band" id="sec-uber"><div class="wrap uber">
     <div style="display:grid;gap:16px"><span class="eyebrow">${t.uberEy}</span><h2 class="disp wave" style="font-size:clamp(2.4rem,5.6vw,4.4rem)">${t.uberH}</h2><p class="mute" style="margin:0;max-width:52ch">${t.uberP}</p>
-      <div class="hero-ctas"><a class="btn btn-neon" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener">${t.orderUber} ↗</a><span class="btn" style="cursor:text;user-select:all">${t.takeaway}</span></div>
+      <div class="hero-ctas"><a class="btn btn-neon" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener">${t.orderUber}&nbsp;<i class="ext" aria-hidden="true"></i></a><span class="btn" style="cursor:text;user-select:all">${t.takeaway}</span></div>
       <div class="facts"><div><small>${t.zoneL}</small>${t.zone}</div><div><small>${t.pickL}</small>${t.pick}</div></div></div>
     <div class="bento-steps">${t.steps.map((s,i)=>`<div class="bstep"><b>${i+1}</b><div><strong style="font-family:var(--f-display);font-size:1.6rem;text-transform:uppercase;font-weight:900">${s[0]}</strong><div class="mute">${s[1]}</div></div></div>`).join("")}
       <img src="${IMG("karaage-don")}" alt="${lang==="pt"?"Karaage Don numa taça preta":"Karaage Don in a black bowl"}" style="aspect-ratio:16/10;object-fit:cover;width:100%" loading="lazy"></div>
   </div></section>
-  <section class="cta"><div class="wrap"><h2 class="disp wave-lg" style="font-size:clamp(2.8rem,7vw,6rem)">${t.doorH}</h2><div class="hero-ctas"><a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Ramen+Me+Rua+da+Picaria+20+Porto" target="_blank" rel="noopener">${t.map} ↗</a><a class="btn" href="#menu">${t.seeMenu}</a></div></div></section>`;
+  <section class="cta"><div class="wrap"><h2 class="disp wave-lg" style="font-size:clamp(2.8rem,7vw,6rem)">${t.doorH}</h2><div class="hero-ctas"><a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&query=Ramen+Me+Rua+da+Picaria+20+Porto" target="_blank" rel="noopener">${t.map}&nbsp;<i class="ext" aria-hidden="true"></i></a><a class="btn" href="#menu">${t.seeMenu}</a></div></div></section>`;
 }
 function resText(){
   const r=st.res, t=L();
@@ -1015,11 +1019,11 @@ function pContact(){
       <div class="full err" id="recErr" role="alert"></div>
       <div class="full"><button class="btn btn-neon" type="submit">${t.apply} →</button></div>
     </form>`;
-  const info=[[t.cAddr,"Rua da Picaria 20<br>4050-477 Porto","Rua da Picaria 20, 4050-477 Porto"],[t.cPhone,"+351 22 323 5090","+351223235090"],[t.cEmail,"reservas.porto@ramenme.pt","reservas.porto@ramenme.pt"],[t.cIg,`<a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">@ramenme.pt ↗</a>`],[t.cHours,t.cHoursV],[t.cHow,t.cHowV]];
+  const info=[[t.cAddr,"Rua da Picaria 20<br>4050-477 Porto","Rua da Picaria 20, 4050-477 Porto"],[t.cPhone,"+351 22 323 5090","+351223235090"],[t.cEmail,"reservas.porto@ramenme.pt","reservas.porto@ramenme.pt"],[t.cIg,`<a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">@ramenme.pt&nbsp;<i class="ext" aria-hidden="true"></i></a>`],[t.cHours,t.cHoursV],[t.cHow,t.cHowV]];
   return `${pageHead(t.conEy,t.conH,"","連絡")}
   <section class="band" style="padding-top:56px"><div class="wrap" style="display:grid;gap:32px">
     <div class="cgrid">${info.map(i=>`<div><small>${i[0]}</small><b>${i[1]}</b>${i[2]?`<button class="copy" type="button" data-copytxt="${esc(i[2])}">${t.copy}</button>`:""}</div>`).join("")}</div>
-    <div class="hero-ctas"><a class="btn btn-neon" href="#reservas">${t.bookTable}</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Ramen+Me+Rua+da+Picaria+20+Porto" target="_blank" rel="noopener">${t.map} ↗</a></div>
+    <div class="hero-ctas"><a class="btn btn-neon" href="#reservas">${t.bookTable}</a><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Ramen+Me+Rua+da+Picaria+20+Porto" target="_blank" rel="noopener">${t.map}&nbsp;<i class="ext" aria-hidden="true"></i></a></div>
     <div class="cards3">${[[t.groupsH,t.groupsP,t.groupsA],[t.pressH,t.pressP,t.pressA],[t.lostH,t.lostP,t.lostA]].map(c=>`<div><h3>${c[0]}</h3><p>${c[1]}</p><span class="mono" style="font-size:.8rem;color:var(--neon);user-select:all;overflow-wrap:anywhere">${c[2]}</span></div>`).join("")}</div>
   </div></section>
   ${ticker(true)}
@@ -1031,7 +1035,7 @@ function pContact(){
     </div>
     <div style="display:grid;gap:16px"><p class="note" style="margin:0;font-size:.92rem">${t.recNote}</p>${recForm}</div>
   </div></section>
-  <section class="band" style="padding-top:0"><div class="wrap"><div class="allerg"><div class="ico" aria-hidden="true">§</div><div style="display:grid;gap:10px"><h2 class="disp" style="font-size:2rem">${t.privH}</h2><p class="mute" style="margin:0">${t.privP}</p><div class="hero-ctas"><a class="btn btn-sm" href="#privacidade">${t.privLink}</a><a class="btn btn-sm" href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">${t.fBook} ↗</a></div></div></div></div></section>
+  <section class="band" style="padding-top:0"><div class="wrap"><div class="allerg"><div class="ico" aria-hidden="true">§</div><div style="display:grid;gap:10px"><h2 class="disp" style="font-size:2rem">${t.privH}</h2><p class="mute" style="margin:0">${t.privP}</p><div class="hero-ctas"><a class="btn btn-sm" href="#privacidade">${t.privLink}</a><a class="btn btn-sm" href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">${t.fBook}&nbsp;<i class="ext" aria-hidden="true"></i></a></div></div></div></div></section>
   ${ctaBand(t.conCta)}`;
 }
 function pPriv(){
@@ -1058,8 +1062,8 @@ function renderChrome(){
         <div class="foot-addr"><span>Rua da Picaria 20<br>4050-477 Porto</span><span class="status" data-status style="justify-self:start"><i></i><b></b></span></div>
         <div style="margin-top:22px">${MASCOT}</div></div>
       <div><h4>${t.fVisit}</h4><ul><li><a href="#menu">${t.nav.menu}</a></li><li><a href="#reservas">${t.nav.reservas}</a></li><li><a href="#beats">W/ Beats</a></li><li><a href="#uber">Uber Eats</a></li><li><a href="#contacto">${t.nav.contacto}</a></li></ul></div>
-      <div><h4>${t.fHouse}</h4><ul><li><a href="#sobre">${t.nav.sobre}</a></li><li><a href="#recrutamento">${t.fRec}</a></li><li><a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">Instagram ↗</a></li></ul></div>
-      <div><h4>${t.fLegal}</h4><ul><li><a href="#privacidade">${t.privLink}</a></li><li><a href="#privacidade">${t.fCookies}</a></li><li><a href="#alergenios">${t.fAllerg}</a></li><li><a href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">${t.fBook} ↗</a></li></ul></div>
+      <div><h4>${t.fHouse}</h4><ul><li><a href="#sobre">${t.nav.sobre}</a></li><li><a href="#recrutamento">${t.fRec}</a></li><li><a href="https://www.instagram.com/ramenme.pt/" target="_blank" rel="noopener">Instagram&nbsp;<i class="ext" aria-hidden="true"></i></a></li></ul></div>
+      <div><h4>${t.fLegal}</h4><ul><li><a href="#privacidade">${t.privLink}</a></li><li><a href="#privacidade">${t.fCookies}</a></li><li><a href="#alergenios">${t.fAllerg}</a></li><li><a href="https://www.livroreclamacoes.pt/inicio" target="_blank" rel="noopener">${t.fBook}&nbsp;<i class="ext" aria-hidden="true"></i></a></li></ul></div>
     </div>
     <div class="foot-bot"><span>${t.fRights}</span><span>${t.fProto} · PT / EN</span></div></div>`;
 }
@@ -1121,7 +1125,7 @@ function openTray(keepFocus){
     ${lines?`<hr><div class="rtotal"><span>${t.total}</span><span>${eur(trayTotal())}</span></div>`:""}
     <hr><p style="margin:0;font-size:.76rem">${t.trayNote}</p>
     <div class="barcode" aria-hidden="true"></div>
-    ${lines?`<button class="rbtn" type="button" data-copy="tray">${t.copyTicket}</button><a class="rbtn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener" style="background:var(--neon);color:#130404">${t.orderUber} ↗</a><button class="rbtn" type="button" data-clear style="background:transparent;color:var(--paper-ink);border:1.5px solid var(--paper-ink)">${t.clear}</button>`:`<a class="rbtn" href="#menu" data-close>${t.seeMenu}</a>`}
+    ${lines?`<button class="rbtn" type="button" data-copy="tray">${t.copyTicket}</button><a class="rbtn" href="https://www.ubereats.com/pt-en/store/ramen-me/BHB_va7eUGiSVJ20dfNQ-w" target="_blank" rel="noopener" style="background:var(--neon);color:#130404">${t.orderUber}&nbsp;<i class="ext" aria-hidden="true"></i></a><button class="rbtn" type="button" data-clear style="background:transparent;color:var(--paper-ink);border:1.5px solid var(--paper-ink)">${t.clear}</button>`:`<a class="rbtn" href="#menu" data-close>${t.seeMenu}</a>`}
   </div></div>`;
   setInert(true); document.querySelector("[data-close]").focus();
 }
